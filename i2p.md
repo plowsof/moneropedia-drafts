@@ -1,8 +1,5 @@
-### The Basics
-
-- Info on what i2p is
-- What it is used for
-- Compare to tor
+# User guide 
+- main focus will be 'how to use i2p with monero gui connecting to a remote node' 
 
 ### In-depth information
 
