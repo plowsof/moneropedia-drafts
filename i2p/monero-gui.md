@@ -14,8 +14,7 @@ For privacy reasons, do not disclose this port number to other people. Tell your
 5. Create a server tunnel for incoming I2P connections `Tunnels -> Add` (port 8061):
 ![I2P-zero server tunnel](https://raw.githubusercontent.com/plowsof/moneropedia-drafts/main/i2p/user_guide_rnd_8.png)
 6. The `Server public address` is your new I2P address. To copy the entire address, right click, select all, then copy.
-7. In the Monero GUI, go to `Settings -> Node` and click `Stop node` the replace `XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.b32.i2p` with your own I2P address that you copied in step 6. Then paste it all inside the `Daemon start up flags` box:    
-    
+7. In the Monero GUI, go to `Settings -> Node` and click `Stop node`. Now paste the text below into the `Daemon start up flags` box: (replace `XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.b32.i2p` with your own I2P address that you copied in step 6)    
 `
 --tx-proxy i2p,127.0.0.1:8060 --add-peer core5hzivg4v5ttxbor4a3haja6dssksqsmiootlptnsrfsgwqqa.b32.i2p --add-peer dsc7fyzzultm7y6pmx2avu6tze3usc7d27nkbzs5qwuujplxcmzq.b32.i2p --add-peer sel36x6fibfzujwvt4hf5gxolz6kd3jpvbjqg6o3ud2xtionyl2q.b32.i2p --add-peer yht4tm2slhyue42zy5p2dn3sft2ffjjrpuy7oc2lpbhifcidml4q.b32.i2p --anonymous-inbound XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.b32.i2p,127.0.0.1:8061
 `    
@@ -23,6 +22,12 @@ For privacy reasons, do not disclose this port number to other people. Tell your
 8. If done correctly, it will look like the image below and you can now click `Start node`    
 ![Monero GUI daemon flags](https://raw.githubusercontent.com/plowsof/moneropedia-drafts/main/i2p/user_guide_rnd_4.png)    
 That's it! Do not replace the dsc****.b32.i2p address with yours, only replace the XXXXXXX.b32.i2p one. The dsc****.b32.i2p is a seed node that will help you discover other I2P-accessible monero nodes.
+
+## Benefits 
+
+- Remove associations between a particular txid and your IP address
+- Contribute to the I2P network 
+- ... ?
 
 notes
 - refer to these guides if/when applicable
