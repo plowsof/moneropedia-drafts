@@ -21,7 +21,7 @@ For privacy reasons, do not disclose this port number to other people. Tell your
 `    
 
 8. If done correctly, it will look like the image below and you can now click `Start node`    
-![Monero GUI daemon flags](https://raw.githubusercontent.com/plowsof/moneropedia-drafts/main/i2p/user_guide_rnd_4.png)    
+![Monero GUI daemon flags](https://raw.githubusercontent.com/plowsof/moneropedia-drafts/main/i2p/user_guide_rnd_9.png)    
 That's it! Do not replace the dsc****.b32.i2p address with yours, only replace the XXXXXXX.b32.i2p one. The dsc****.b32.i2p is a seed node that will help you discover other I2P-accessible monero nodes.
 
 ## Benefits 
