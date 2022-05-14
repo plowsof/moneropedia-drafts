@@ -20,7 +20,7 @@ For privacy reasons, do not disclose this port number to other people. Tell your
 --tx-proxy i2p,127.0.0.1:8060 --anonymous-inbound XXXXXXXXXXXXXXXXXXXXXXXXXXXXX.b32.i2p,127.0.0.1:8061
 `    
 
-8. If done correctly, it will look like the image below and you can now click `Start node`    
+8. If done correctly, it will look like the image below and you can now click `Start daemon`    
 ![Monero GUI daemon flags](https://raw.githubusercontent.com/plowsof/moneropedia-drafts/main/i2p/user_guide_rnd_9.png)    
 That's it! Do not replace the dsc****.b32.i2p address with yours, only replace the XXXXXXX.b32.i2p one. The dsc****.b32.i2p is a seed node that will help you discover other I2P-accessible monero nodes.
 
