@@ -27,10 +27,5 @@ For privacy reasons, do not disclose this port number to other people. Tell your
 
 - Remove associations between a particular txid and your IP address
 - Contribute to the I2P network 
-- ... ?
+- ... ? highlight / then link to https://github.com/monero-project/monero/blob/master/docs/ANONYMITY_NETWORKS.md#privacy-limitations
 
-notes
-- refer to these guides if/when applicable
-  - https://github.com/i2p-zero/i2p-zero/blob/master/mipseed.md
-  - https://www.reddit.com/r/Monero/comments/kclg5c/for_those_interested_in_running_monerogui_with/
-  - https://www.getmonero.org/resources/user-guides/node-i2p-zero.html
