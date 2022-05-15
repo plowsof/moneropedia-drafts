@@ -20,7 +20,7 @@ with open("test.yaml", "w") as f:
 
 Po config file script ~ all guides need a 'po' file which has the layout:    
 a script to loop all files in a folder and create the matching po file will help    
-will save a minute or two of time    
+will save a minute or two of time (see `make_po_configs.py`) :
 ```
 [po4a_langs] es it pl fr ar ru de nl pt-br tr zh-cn zh-tw nb-no
 [po4a_paths] ../_i18n/en/resources/user-guides/weblate/{TITLE OF GUIDE}.pot $lang:../_i18n/$lang/resources/user-guides/weblate/{TITLE OF GUIDE}.po
