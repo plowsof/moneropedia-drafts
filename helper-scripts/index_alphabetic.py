@@ -29,5 +29,10 @@ for div in divs:
 					"raw_data": lol
 				}
 		data[category].append(info)
+		
+for category in data:
+	alphabetic = sorted(data[category], key=lambda d: d['title_yaml']) 
+	data[category] = alphabetic
 
+pprint.pprint(data)
 pprint.pprint(data)
