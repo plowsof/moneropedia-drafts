@@ -41,7 +41,7 @@ for category in data:
     alphabetic = sorted(data[category], key=lambda d: d['title_yaml']) 
     data[category] = alphabetic
 
-with open("index_template.md", "r") as f:
+with open("index_template.html", "r") as f:
     lines = f.readlines()
 
 with open("index.md", "w+") as f:
