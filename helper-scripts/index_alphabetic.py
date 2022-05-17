@@ -1,10 +1,19 @@
 from bs4 import BeautifulSoup
-import pprint
 import yaml 
-
 en_yaml = "./monero-site/_i18n/en.yml"
+'''
+Category:
+general
+mining
+backup
+nodesync
+recovery
+wallets
+hardwarewallet
+anonimizationnetworks
 
-# Read YAML file
+'''
+
 with open(en_yaml, 'r') as stream:
     data_loaded = yaml.safe_load(stream)
 
@@ -19,8 +28,6 @@ for div in divs:
     data[category] = []
     p = div.find_all("p")
     for lol in p:
-        #link = lol.find_all("a",href=True)[0]
-        #print(link['href'])
         title_key = lol.text.split(".")[1].split(" ")[0]
         title_yaml = data_loaded["user-guides"][title_key]
         info = { 
@@ -50,4 +57,3 @@ with open("index.md", "w+") as f:
                     indent += " "
 
                 f.write(f"{indent}{thing['raw_data']}\n")
-
