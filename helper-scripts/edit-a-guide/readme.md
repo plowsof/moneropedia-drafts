@@ -1,4 +1,4 @@
-some code has to be deleted. text also. but the text needs to have translations with empty string ready for weblate
+some code has to be deleted. text also. but the text needs to have translations with empty string ready for weblate. but the english text to remove May have been translated, so find that and delete.
 
 https://www.getmonero.org/resources/user-guides/node-i2p-zero.html
 
