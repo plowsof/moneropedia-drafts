@@ -93,3 +93,5 @@ msgid ""
 msgstr ""
 
 ```
+
+and finally, _IF_ there is a translated string - we must replace that string with the english paragraph in the markdown file
