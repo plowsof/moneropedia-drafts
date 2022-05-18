@@ -119,6 +119,6 @@ def replace_md_files():
             lines = f.readlines()
         for line in lines:
             if replace_string in line:
-                print(line)
+                line = line.replace(replace_string, "")
 
 replace_md_files()
