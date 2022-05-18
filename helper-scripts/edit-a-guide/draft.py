@@ -2,6 +2,7 @@ import os
 import textwrap
 import pprint
 import glob 
+import shutil
 
 feed_1_str = "Run monerod by typing the following, replacing"
 feed_2_str = "[Service] Type=forking PIDFile=/home/<username>/monerod.pid"
@@ -111,14 +112,20 @@ def replace_md_files():
     global replace_string
     lang = ["nl","pt-br","nb-no","de","it","tr","pl","ru","en","fr","ar","es","zh-cn","zh-tw"]
     for l in lang:
-        fname = f"./monero-site/_i18n/{l}/resources/user-guides/node-i2p-zero.md"
-        if not os.path.isfile(fname):
-            continue
-        print(l)
-        with open(fname,"r") as f:
-            lines = f.readlines()
-        for line in lines:
-            if replace_string in line:
-                line = line.replace(replace_string, "")
+        with open("lol.ok","w+") as ff:
+            fname = f"./monero-site/_i18n/{l}/resources/user-guides/node-i2p-zero.md"
+            if not os.path.isfile(fname):
+                continue
+            print(l)
+            with open(fname,"r") as f:
+                lines = f.readlines()
+            for line in lines:
+                if replace_string in line:
+                    print(line)
+                    line = line.replace(replace_string, "")
+                    ff.write(line)
+        shutil.move("lol.ok",fname)
+
+
 
 replace_md_files()
