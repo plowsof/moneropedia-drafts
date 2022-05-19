@@ -1,7 +1,3 @@
-# Monero GUI local node with i2p
-### Requirements
- - Monero GUI in advanced mode using a local node.
-
 ## Steps:
 
 1. Download and unzip the latest (GUI) version of I2P-zero: https://github.com/i2p-zero/i2p-zero/releases
