@@ -8,7 +8,6 @@ from urllib.parse import urlparse
 import os
 import sys
 en_yaml = "./monero-site/_i18n/en.yml"
-#en_yaml = "en.yml"
 
 '''
 Category:
@@ -22,8 +21,8 @@ hardwarewallet
 anonimizationnetworks
 '''
 category = "anonimizationnetworks"
-title_text = "This is a new guide"
-title_key = "some-new-guide"
+title_text = "This is a new guidelol"
+title_key = "some-new-guides"
 markdown_url = "https://raw.githubusercontent.com/plowsof/userguide-drafts/main/i2p/monero-gui-i2p-node.md"
 
 
@@ -98,7 +97,7 @@ def add_title_to_index(new_key,new_text,category):
                         indent += " "
 
                     f.write(f"{indent}{thing['raw_data']}\n")
-
+    shutil.move("new_index.md","./monero-site/resources/user-guides/index.md")
 # check that the key has not been used
 def check_yaml(title_key):
     global en_yaml
