@@ -9,6 +9,7 @@ https://www.getmonero.org/resources/user-guides/node-i2p-zero.html
 
 ## Less easy
 
+Thankfully, this specific string is on line 14 (in all translated versions too. so its just a simple swap)    
 Replace: 
 ```
 That's it! Do not replace the dsc**.b32.i2p address with yours, only replace the XXXXXXX.b32.i2p one. The dsc**.b32.i2p is a seed node that will help you discover other I2P-accessible monero nodes.
@@ -94,4 +95,3 @@ msgstr ""
 
 ```
 
-and finally, _IF_ there is a translated string - we must replace that string with the english paragraph in the markdown file
