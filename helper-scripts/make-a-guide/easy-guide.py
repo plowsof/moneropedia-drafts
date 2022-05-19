@@ -7,8 +7,8 @@ import requests
 from urllib.parse import urlparse
 import os
 import sys
-#en_yaml = "./monero-site/_i18n/en.yml"
-en_yaml = "en.yml"
+en_yaml = "./monero-site/_i18n/en.yml"
+#en_yaml = "en.yml"
 
 '''
 Category:
