@@ -2,7 +2,6 @@
 pip install yaml
 pip install beautifulsoup4
 ```
-
 ## How? 
 
 Place the python script in the same directory as your `monero-site` folder.    
