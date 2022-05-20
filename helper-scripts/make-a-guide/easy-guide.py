@@ -118,6 +118,7 @@ def handle_markdown_file(furl,title_key,title_text):
         f.write(r'{% include disclaimer.html translated="no" translationOutdated="no" %}')
         f.write("\n\n")
         for line in lines:
+            # https://stackoverflow.com/a/44227600 [regex to parse markdown images]
             p = re.compile('!\[[^\]]*\]\((.*?)\s*("(?:.*[^"])")?\s*\)')
             m = p.search(line)
             if m:
