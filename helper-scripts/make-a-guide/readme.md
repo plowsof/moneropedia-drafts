@@ -19,4 +19,4 @@ Thats it.. your monero-site folder should be populated with all the files needed
 
 ## What it does
 
-Lets you create a guide on github. You can put images in it to because the script will find them, and put them in the correct monero-site folder for your guide. Simply point the script to the raw text version, and it will do the rest for you.
+Lets you create a guide on github. You can put images in it to because the script will find them, and put them in the correct monero-site folder for your guide. Simply point the script to the raw text version, and it will do the rest for you. Will fail if the YAML key exists already.
