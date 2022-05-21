@@ -5,6 +5,8 @@ Pruning from scratch is simple. It is done as follows:
 ![pruned_2](https://user-images.githubusercontent.com/77655812/169632991-1543218b-d5ac-448c-adf5-9ca045694d9d.png)
 3. Check `Prune blockchain` and click `Next`
 
+Your blockchain will now begin synchronizing in pruned mode. Remember, you will be unable to use your wallet until this process has completed.
+
 ### Pruning an existing (synced) blockchain file
 In most cases, pruning an existing blockchain will take almost as long as starting from scratch, so it is recommended to delete your existing blockchain, and follow the above steps of pruning from scratch from within the Monero GUI. Another benefit of doing this is that it will save more disk space because the blockchain pruning tool will create a duplicate (pruned) blockchain along side your existing one.    
 To remove your blockchain you must delete `data.mdb`.
