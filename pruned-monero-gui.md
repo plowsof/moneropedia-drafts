@@ -34,3 +34,5 @@ First, note that this requires approximately 30 GB of additional storage, as, in
 8. Note that `path/to/preferred/data/directory` is a placeholder that should be replaced by the actual path. To reiterate, this may take quite some time to complete. Thus, I'd advise to run it overnight.
 9. After the `monero-blockchain-prune` tool has finished, open `monero-wallet-gui` and verify that it is running properly.
 10. You can now delete the 'old' non-pruned blockchain file.
+
+*The original version of is taken from stackexchange answer by DEBRUYNE [here]([https://github.com/i2p-zero/i2p-zero/blob/master/monerod-with-i2p-zero.md](https://monero.stackexchange.com/a/11455)).*
