@@ -13,7 +13,7 @@ First, note that this requires approximately 30 GB of additional storage, as, in
 2. Browse to the directory v0.17.1.4 monero-wallet-gui is located.
 3. If you are using a custom data directory, skip step 4 and proceed to step 5.
 4. Run the monero-blockchain-prune tool (on MacOS, you will have to right click -> Show package contents -> Contents -> MacOS on monero-wallet-gui.app in order to see the tool). Note that this may take quite some time to complete. Thus, I'd advise to run it overnight.
-5. Windows - custom data directory:
+5. ### Windows - custom data directory:
     1. Open a new command prompt / powershell from the directory of `monero-wallet-gui`. This is done by first making sure your cursor isn't located on any of the files and subsequently doing SHIFT + right click. It will give you an option to "Open command window here". If you're using Windows 10, it'll, most likely, give you an option to open the Powershell.
     2. Type:
     `monero-blockchain-prune.exe --data-dir path\to\preferred\data\directory` (Win 7 + 8)
