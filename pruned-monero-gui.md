@@ -3,7 +3,7 @@ Pruning from scratch or enabling pruning going forward is fairly straight forwar
 1. Go to the `Settings` page and switch to the `Node` tab.
 2. Make sure `Local node` is selected.
 3. Add the `--prune-blockchain` flag to the `Daemon` `startup flags` box.
-[Monero GUI pruned flag](https://user-images.githubusercontent.com/77655812/169628748-2e0b106e-e32a-42e7-a41c-2c4e4f60194a.png)
+![Monero GUI pruned flag](https://user-images.githubusercontent.com/77655812/169628748-2e0b106e-e32a-42e7-a41c-2c4e4f60194a.png)
 5. Restart (by clicking on the `x` (right top) and making sure to stop the daemon as well) the GUI to ensure the flag goes into effect.
 Pruning is now enabled and will significantly reduce the amount of storage required.   
 
