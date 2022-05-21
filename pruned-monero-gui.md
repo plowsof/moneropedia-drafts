@@ -14,23 +14,23 @@ First, note that this requires approximately 30 GB of additional storage, as, in
 3. If you are using a custom data directory, skip step 4 and proceed to step 5.
 4. Run the monero-blockchain-prune tool (on MacOS, you will have to right click -> Show package contents -> Contents -> MacOS on monero-wallet-gui.app in order to see the tool). Note that this may take quite some time to complete. Thus, I'd advise to run it overnight.
 5. Windows - custom data directory:
-  1. Open a new command prompt / powershell from the directory of `monero-wallet-gui`. This is done by first making sure your cursor isn't located on any of the files and subsequently doing SHIFT + right click. It will give you an option to "Open command window here". If you're using Windows 10, it'll, most likely, give you an option to open the Powershell.
-  2. Type:
+    1. Open a new command prompt / powershell from the directory of `monero-wallet-gui`. This is done by first making sure your cursor isn't located on any of the files and subsequently doing SHIFT + right click. It will give you an option to "Open command window here". If you're using Windows 10, it'll, most likely, give you an option to open the Powershell.
+    2. Type:
     `monero-blockchain-prune.exe --data-dir path\to\preferred\data\directory` (Win 7 + 8)
     `.\monero-blockchain-prune.exe --data-dir path\to\preferred\data\directory` (Win 10)
 6. Linux - custom data directory:
-  1. Open a new command terminal from the directory of monero-wallet-gui
-  2. Type:
+    1. Open a new command terminal from the directory of monero-wallet-gui
+    2. Type:
     `./monero-blockchain-prune --data-dir path/to/preferred/data/directory`
 7. MacOS - custom data directory:
-  1. Go to your desktop.
-  2. Open a new terminal (if don't know how to open a terminal, see [here](https://apple.stackexchange.com/a/256263)).
-  3. Drag monero-blockchain-prune in the terminal. It should add the full path to the terminal. Do not hit enter.
-  4. Now type:
-    `--data-dir path/to/preferred/data/directory`
-  5. Note that aforementioned text will be appended to the path of `monero-blockchain-prune`. Thus, before you hit enter, your terminal should look like:
-    `/full/path/to/monero-blockchain-prune --data-dir path/to/preferred/data/directory`    
-    Where the full path is, intuitively, the actual path on your MacOS.
+    1. Go to your desktop.
+    2. Open a new terminal (if don't know how to open a terminal, see [here](https://apple.stackexchange.com/a/256263)).
+    3. Drag monero-blockchain-prune in the terminal. It should add the full path to the terminal. Do not hit enter.
+    4. Now type:
+      `--data-dir path/to/preferred/data/directory`
+    5. Note that aforementioned text will be appended to the path of `monero-blockchain-prune`. Thus, before you hit enter, your terminal should look like:
+      `/full/path/to/monero-blockchain-prune --data-dir path/to/preferred/data/directory`       
+      Where the full path is, intuitively, the actual path on your MacOS.
 8. Note that `path/to/preferred/data/directory` is a placeholder that should be replaced by the actual path. To reiterate, this may take quite some time to complete. Thus, I'd advise to run it overnight.
 9. After the `monero-blockchain-prune` tool has finished, open `monero-wallet-gui` and verify that it is running properly.
 10. You can now delete the 'old' non-pruned blockchain file.
