@@ -1,5 +1,5 @@
 ### Pruning from scratch or enable pruning going forward
-Pruning from scratch or enabling pruning going forward is fairly straight forward. It is done as follows:
+Pruning from scratch or enabling pruning going forward is fairly straight forward. It is done as follows: (make sure your wallet is in [advanced mode](https://www.getmonero.org/resources/user-guides/remote_node_gui.html#:~:text=Change%20your%20wallet%20to%20advanced%20mode&text=The%20main%20menu%20(%20Welcome%20to,next%20page%20select%20Advanced%20mode%20.))
 1. Go to the `Settings` page and switch to the `Node` tab.
 2. Make sure `Local node` is selected.
 3. Add the `--prune-blockchain` flag to the `Daemon` `startup flags` box.
