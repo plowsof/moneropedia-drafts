@@ -18,11 +18,11 @@ First, note that this requires approximately 30 GB of additional storage, as, in
   2. Type:
     `monero-blockchain-prune.exe --data-dir path\to\preferred\data\directory` (Win 7 + 8)
     `.\monero-blockchain-prune.exe --data-dir path\to\preferred\data\directory` (Win 10)
-5b. Linux - custom data directory:
+5 b. Linux - custom data directory:
   1. Open a new command terminal from the directory of monero-wallet-gui
   2. Type:
     `./monero-blockchain-prune --data-dir path/to/preferred/data/directory`
-5c. MacOS - custom data directory:
+5 c. MacOS - custom data directory:
   1. Go to your desktop.
   2. Open a new terminal (if don't know how to open a terminal, see [here](https://apple.stackexchange.com/a/256263)).
   3. Drag monero-blockchain-prune in the terminal. It should add the full path to the terminal. Do not hit enter.
