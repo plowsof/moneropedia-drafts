@@ -3,7 +3,7 @@ Pruning from scratch is simple. It is done as follows:
 1. Start the Monero GUI and select `Create a new wallet` using `Advanced mode`
 2. After setting your wallet name / confirming a password you will arrive at the `Daemon Settings` menu below:
 ![pruned_2](https://user-images.githubusercontent.com/77655812/169632991-1543218b-d5ac-448c-adf5-9ca045694d9d.png)
-3. Check `Prune blockchain` and click `Next`
+3. Click `Prune blockchain` and click `Next`
 
 Your blockchain will now begin synchronizing in pruned mode. Remember, you will be unable to use your wallet until this process has completed.
 
