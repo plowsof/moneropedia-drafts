@@ -7,7 +7,7 @@ Pruning from scratch is simple. It is done as follows:
 
 ### Pruning an existing (synced) blockchain file
 In most cases, pruning an existing blockchain will take almost as long as starting from scratch, so it is recommended to delete your existing blockchain, and follow the above steps of pruning from scratch from within the Monero GUI. Another benefit of doing this is that it will save more disk space because the blockchain pruning tool will create a duplicate (pruned) blockchain along side your existing one.    
-To delete your blockchain, you must delete your blockchain which is stored in file called `data.mdb`.
+To remove your blockchain you must delete `data.mdb`.
 
 - Windows this file is stored in `C:\ProgramData\bitmonero\lmdb`. It's a hidden folder, but if you simply copy paste aforementioned path into your Windows explorer it will go to it. The folder contains your blockchain (data.mdb) which you can delete.
 - Linux users will find it in their users home directory `/.bitmonero/lmdb`.
