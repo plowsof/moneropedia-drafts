@@ -4,7 +4,7 @@ Lets change that, and organise everything in alphabetic order too
 
 first impressions of parsing the html:
 
-'''Python
+```Python
 def add_faq_to_index(new_key,new_text,category):
     global en_yaml
     with open("faq_index.md", "r") as f:
@@ -19,4 +19,4 @@ def add_faq_to_index(new_key,new_text,category):
     		print(data_loaded["faq"][ok.text.split("faq.")[1].split(" %}")[0]])
 
 add_faq_to_index("","","")
-'''
+```
