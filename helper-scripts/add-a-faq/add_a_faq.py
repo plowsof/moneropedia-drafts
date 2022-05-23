@@ -47,9 +47,9 @@ def add_new_faq(key,q,a,category):
             if line == "faq:\n":
                 at_faq = 1
             if line == "\n" and at_faq == 1:
-                f.write(f"{q_key}: {q}\n")
+                f.write(f"  {q_key}: {q}\n")
                 for x in a_paragraphs:
-                    f.write(f"{x}: {a_paragraphs[x]['text']}\n")
+                    f.write(f"  {x}: {a_paragraphs[x]['text']}\n")
                 at_faq = 0
             f.write(line)
     # add to data_q
