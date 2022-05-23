@@ -72,6 +72,11 @@ def add_new_faq(key,q,a,category):
     raw_html += "</div>\n</div>"
     data_a[anchor] = raw_html
 
+    # order list
+    for category in data_q:
+        alphabetic = sorted(data_q[category], key=lambda d: d['question']) 
+        data_q[category] = alphabetic
+
 def parse_html(list_item,category):
     global data,yaml_data_q
     anchor = list_item.find('a', href=True)['href'].split("#")[1]
@@ -118,10 +123,6 @@ def build_lists():
         raw_html = a
         data_a[anchor] = raw_html
         number += 1
-
-    for category in data_q:
-        alphabetic = sorted(data_q[category], key=lambda d: d['question']) 
-        data_q[category] = alphabetic
 
 def create_index():    
     in_16 = ""
