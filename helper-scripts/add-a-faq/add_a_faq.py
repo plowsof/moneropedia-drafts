@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 import os
 import sys
 en_yaml = "./monero-site/_i18n/en.yml"
-
+faq_index = "./monero-site/get-started/faq/index.md"
 data_q = {}
 data_a = {}
 yaml_data = {}
@@ -42,7 +42,7 @@ def add_new_faq(key,q,a,category):
         lines = f.readlines()
     at_faq = 0
     done = 0
-    with open("faq_new_yaml.yml","w+") as f:
+    with open(en_yaml,"w+") as f:
         for line in lines:
             if line == "faq:\n":
                 at_faq = 1
@@ -124,7 +124,8 @@ def build_lists():
         data_a[anchor] = raw_html
         number += 1
 
-def create_index():    
+def create_index():  
+    global faq_index  
     in_16 = ""
     in_20 = ""
     in_24 = ""
@@ -143,7 +144,7 @@ def create_index():
     do_toc_thing = 0
     do_other_thing = 0
     div_open = 0
-    with open("new_faq.md","w+") as f:
+    with open(faq_index,"w+") as f:
         for line in template_lines:
             if "!_! toc_general !_!" in line:
                 do_toc_thing = 1
