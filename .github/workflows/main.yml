@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install dependencies
         run: |
-          sudo apt-get install -y --no-install-recommends python-pip netcat
+          sudo apt-get install -y --no-install-recommends python3-pip netcat
           sudo pip install beautifulsoup4 yaml
       - name: Alphabetic-order script
         run: |
