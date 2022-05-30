@@ -147,7 +147,7 @@ for div in divs:
                     "raw_data": lol
                 }
         data[category].append(info)
-
+fine = 0
 for category in data:
     original = data[category]
     alphabetic = sorted(data[category], key=lambda d: d['title_yaml']) 
