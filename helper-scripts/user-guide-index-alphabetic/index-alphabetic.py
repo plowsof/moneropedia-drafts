@@ -4,8 +4,8 @@ import pprint
 import sys
 import subprocess
 
-en_yaml = "./monero-site/_i18n/en.yml"
-index = "./monero-site/resources/user-guides/index.md"
+en_yaml = "_i18n/en.yml"
+index = "resources/user-guides/index.md"
 '''
 Category:
 general
