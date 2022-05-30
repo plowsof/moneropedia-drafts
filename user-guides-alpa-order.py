@@ -160,6 +160,8 @@ for category in data:
         fine = 0
 
 if fine == 0:
+    sys.exit(1)
+    '''
     with open("is_alphabetic.md", "w+") as f:
         for line in template.splitlines():
             if "!_!" not in line:
@@ -176,4 +178,4 @@ if fine == 0:
 
     termbin_url = subprocess.check_output(["cat is_alphabetic.md | nc termbin.com 9999"],shell=True).decode("utf-8")
     print(f"Ordered version at: {termbin_url}")
-    sys.exit(1)
+    '''
