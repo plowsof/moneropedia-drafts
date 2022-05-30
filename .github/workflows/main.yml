@@ -2,8 +2,6 @@
 name: User-guides alphabetic ordering
 on:
   push:
-    paths:
-      - '/resources/user-guides/index.md'
   pull_request:
     paths:
       - '/resources/user-guides/index.md'
