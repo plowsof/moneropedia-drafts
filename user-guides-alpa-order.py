@@ -176,4 +176,4 @@ if fine == 0:
 
     termbin_url = subprocess.check_output(["cat is_alphabetic.md | nc termbin.com 9999"],shell=True).decode("utf-8")
     print(f"Ordered version at: {termbin_url}")
-    sys.exit(0)
+    sys.exit(1)
