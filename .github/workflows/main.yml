@@ -17,7 +17,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Install dependencies
         run: |
-          sudo apt-get install -y --no-install-recommends python3-pip netcat
+          sudo apt-get install -y --no-install-recommends python3-pip
           sudo pip install beautifulsoup4 PyYAML
       - name: Alphabetic-order script
         run: |
