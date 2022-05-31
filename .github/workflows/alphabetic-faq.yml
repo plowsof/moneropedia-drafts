@@ -21,4 +21,4 @@ jobs:
           sudo pip install beautifulsoup4 PyYAML
       - name: Alphabetic-order script
         run: |
-          python3 alphabetic-faq.py
+          python3 .github/workflows/alphabetic-faq.py
