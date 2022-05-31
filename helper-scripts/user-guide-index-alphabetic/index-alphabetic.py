@@ -152,28 +152,21 @@ for category in data:
     original = data[category]
     alphabetic = sorted(data[category], key=lambda d: d['title_yaml']) 
     data[category] = alphabetic
-    fine = 1
     if original == alphabetic:
         print(f"--> Category: {category} [ OK ]")
     else:
         print(f"--> Category: {category} [ FAIL ]")
-        fine = 0
+        
+with open("is_alphabetic.md", "w+") as f:
+    for line in template.splitlines():
+        if "!_!" not in line:
+            f.write(line + "\n")
+        else:
+            category = line.split("!_!")[1].strip()
+            for thing in data[category]:
+                raw_data = thing["raw_data"]
+                indent = ""
+                for i in range(28):
+                    indent += " "
 
-if fine == 0:
-    with open("is_alphabetic.md", "w+") as f:
-        for line in template.splitlines():
-            if "!_!" not in line:
-                f.write(line + "\n")
-            else:
-                category = line.split("!_!")[1].strip()
-                for thing in data[category]:
-                    raw_data = thing["raw_data"]
-                    indent = ""
-                    for i in range(28):
-                        indent += " "
-
-                    f.write(f"{indent}{thing['raw_data']}\n")
-
-    termbin_url = subprocess.check_output(["cat is_alphabetic.md | nc termbin.com 9999"],shell=True).decode("utf-8")
-    print(f"Ordered version at: {termbin_url}")
-    sys.exit(1)
+                f.write(f"{indent}{thing['raw_data']}\n")
