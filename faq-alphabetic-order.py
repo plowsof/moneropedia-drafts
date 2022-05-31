@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 import yaml 
 import sys
-en_yaml = "./monero-site/_i18n/en.yml"
-faq_index = "./monero-site/get-started/faq/index.md"
+en_yaml = "_i18n/en.yml"
+faq_index = "get-started/faq/index.md"
 data_q = {}
 yaml_data = {}
 
