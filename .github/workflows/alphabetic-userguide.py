@@ -26,17 +26,19 @@ for div in divs:
                     "raw_data": lol
                 }
         data[category].append(info)
-
-for category in data:
-    original = data[category]
-    alphabetic = sorted(data[category], key=lambda d: d['title_yaml']) 
-    data[category] = alphabetic
-    fine = 1
-    if original == alphabetic:
-        print(f"--> Category: {category} [ OK ]")
-    else:
-        print(f"--> Category: {category} [ FAIL ]")
-        fine = 0
+try:
+    for category in data:
+        original = data[category]
+        alphabetic = sorted(data[category], key=lambda d: d['title_yaml']) 
+        data[category] = alphabetic
+        fine = 1
+        if original == alphabetic:
+            print(f"--> Category: {category} [ OK ]")
+        else:
+            print(f"--> Category: {category} [ FAIL ]")
+            fine = 0
+except:
+    print("huh?")
 
 if fine == 0:
     sys.exit(1)
