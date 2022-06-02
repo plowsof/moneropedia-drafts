@@ -16,14 +16,14 @@ for div in divs:
     category = str(div.find("h2"))
     category = category.split(".")[1].split(" ")[0]
     data[category] = []
-    p = div.find_all("p")
-    for lol in p:
-        title_key = lol.text.split(".")[1].split(" ")[0]
+    items = div.find_all("p")
+    for raw_html in items:
+        title_key = raw_html.text.split(".")[1].split(" ")[0]
         title_yaml = data_loaded["user-guides"][title_key]
         info = { 
                     "title_key": title_key,
                     "title_yaml": title_yaml,
-                    "raw_data": lol
+                    "raw_data": raw_html
                 }
         data[category].append(info)
 
