@@ -20,6 +20,7 @@ permalink: /get-started/faq/index.html
                 <ul>
                     <li class="category">{% t faq.general %}</li>
                     <ul class="logo">
+                        <li><a href="#anchor-value">{% t faq.q1 %}</a></li>
                         <li><a href="#vulnerabilities">{% t faq.qvuln %}</a></li>
                         <li><a href="#videos">{% t faq.qvideos %}</a></li>
                         <li><a href="#anchor-contribute">{% t faq.qcontribute %}</a></li>
