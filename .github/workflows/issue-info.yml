@@ -42,7 +42,7 @@ jobs:
             **Edit:** Some additional info
              ${{ steps.template.outputs.result }}
           reactions: eyes
-      -name: Real edit
+      - name: Real edit
         uses: JungWinter/comment@v1.1.0
         with:
           type: edit
