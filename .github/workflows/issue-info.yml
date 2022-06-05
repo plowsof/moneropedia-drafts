@@ -48,3 +48,9 @@ jobs:
             **Edit:** Some additional info
              ${{ steps.template.outputs.result }}
           reactions: eyes
+      - name: Real edit
+        uses: JungWinter/comment@v1.1.0
+        with:
+          type: edit
+          body: ${{ steps.template.outputs.result }}
+          comment_id: ${{ steps.lol.outputs.comment-id }}
