@@ -1,6 +1,6 @@
 on: issues
 permissions:
-  issues: read|write
+  issues: write
 jobs:
   job1:
     runs-on: ubuntu-latest
