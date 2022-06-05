@@ -21,6 +21,8 @@ jobs:
           issue-number: ${{ github.event.issue.number }}
           body: |
             This issue is available for anyone to work on. **Make sure to reference this issue in your pull request.** :sparkles: Thank you for your contribution! :sparkles:
+          reactions:
+            hooray,eyes,rocket
       - name: Check outputs
         run: |
-          echo "Comment ID - ${{ steps.couc.outputs.comment-id }}"
+          echo "Comment ID - ${{ steps.lol.outputs.comment-id }}"
