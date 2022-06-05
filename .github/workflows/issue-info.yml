@@ -26,3 +26,10 @@ jobs:
       - name: Check outputs
         run: |
           echo "Comment ID - ${{ steps.lol.outputs.comment-id }}"
+      - name: Update comment
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          comment-id: ${{ steps.lol.outputs.comment-id }}
+          body: |
+            **Edit:** Some additional info
+          reactions: eyes
