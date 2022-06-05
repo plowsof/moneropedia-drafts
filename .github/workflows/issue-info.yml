@@ -22,10 +22,10 @@ jobs:
             This issue is available for anyone to work on. **Make sure to reference this issue in your pull request.** :sparkles: Thank you for your contribution! :sparkles:
           reactions:
             hooray,eyes,rocket
+      - uses: actions/checkout@v2
       - name: Render template
         id: template
-        uses: chuhlomin/render-template@v1.4
-        uses: actions/checkout@v2
+        uses: chuhlomin/render-template@v1.5
         with:
           template: .github/comment-template.md
           vars: |
