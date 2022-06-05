@@ -31,12 +31,6 @@ jobs:
           vars: |
             foo: this
             bar: that
-
-      - name: Create comment
-        uses: peter-evans/create-or-update-comment@v2
-        with:
-          issue-number: 1
-          body: ${{ steps.template.outputs.result }}
       - name: Check outputs
         run: |
           echo "Comment ID - ${{ steps.lol.outputs.comment-id }}"
