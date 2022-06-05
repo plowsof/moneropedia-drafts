@@ -49,3 +49,4 @@ jobs:
           type: edit
           body: ${{ steps.template.outputs.result }}
           comment_id: ${{ steps.lol.outputs.comment-id }}
+          token: ${{ secrets.GITHUB_TOKEN }}
