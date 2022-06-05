@@ -5,6 +5,7 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: View issue information
         run: |
           echo "Issue title: ${{ github.event.issue.title }}"
@@ -13,7 +14,6 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-        
       - name: Add comment
         id: lol
         uses: peter-evans/create-or-update-comment@v2
@@ -23,7 +23,6 @@ jobs:
             This issue is available for anyone to work on. **Make sure to reference this issue in your pull request.** :sparkles: Thank you for your contribution! :sparkles:
           reactions:
             hooray,eyes,rocket
-      - uses: actions/checkout@v2
       - name: Render template
         id: template
         uses: chuhlomin/render-template@v1.4
