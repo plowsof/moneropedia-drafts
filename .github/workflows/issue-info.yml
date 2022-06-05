@@ -15,8 +15,6 @@ jobs:
         
       - name: Add comment
         uses: peter-evans/create-or-update-comment@v2
-        token:
-          issues: write
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
