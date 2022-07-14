@@ -10,7 +10,7 @@ After scanning is complete, Monero should be removed or added to your balance. W
 1) With your wallet open, click on `Settings` -> `Wallet` -> `Scan transaction`
 2) Enter the txid you want to scan and click OK.
 
-![Enter TXID GUI](https://raw.githubusercontent.com/plowsof/userguide-drafts/main/scan/scan_tx_2.png){:width="600px"}
+![Enter TXID GUI](https://raw.githubusercontent.com/plowsof/userguide-drafts/main/scan/scan_tx_2.png)
 
 3) If anything was found, your balance will update, and the transaction will appear in your history.
 
