@@ -1,9 +1,9 @@
-How to scan for a missing transaction (CLI/GUI)
+## How to scan for a missing transaction (CLI/GUI)
 
 If you have sent or received Monero and it is not appearing in your wallet, you can scan for the specific transaction using its txid.
 After scanning is complete, Monero should be removed or added to your balance.
 
-Monero GUI
+## Monero GUI
 
 //image//
 
@@ -14,7 +14,7 @@ Monero GUI
 
 3) If anything was found, your balance will update, and the transaction will appear in your history.
 
-Monero CLI
+## Monero CLI
 
 1) With your wallet open, simply enter `scan_tx` followed by the txid you want to scan.
 
