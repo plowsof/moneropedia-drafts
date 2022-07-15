@@ -16,8 +16,8 @@ markdown_url = "https://raw.githubusercontent.com/plowsof/userguide-drafts/main/
 ```
 
 ### tip:
-title_text : in your markdown file do not include the main title, instead you put it here
-markdown_url : this has to be the 'raw' url
+- title_text : in your markdown file do not include the main title, instead you put it here
+- markdown_url : this has to be the 'raw' url
 
 The script will detect images in your markdown file, download them, do all the leg work of placing them in the correct folder / correct href links.    
 
