@@ -20,7 +20,7 @@ wallets
 hardwarewallet
 anonimizationnetworks
 '''
-category = "anonimizationnetworks"
+guide_category = "anonimizationnetworks"
 title_text = "This is a new guidelol"
 title_key = "some-new-guides"
 markdown_url = "https://raw.githubusercontent.com/plowsof/userguide-drafts/main/i2p/monero-gui-i2p-node.md"
@@ -47,7 +47,7 @@ def add_title_to_yaml(title_key,title_text):
         sys.exit()
 
 # sort the index file out
-def add_title_to_index(new_key,new_text,category):
+def add_title_to_index(new_key,new_text,guide_category):
     global en_yaml
     with open("./monero-site/resources/user-guides/index.md", "r") as f:
         soup = BeautifulSoup(f, "html.parser")
@@ -76,7 +76,7 @@ def add_title_to_index(new_key,new_text,category):
             "title_yaml": new_text,
             "raw_data": raw_html
     }
-    data[category].append(info)
+    data[guide_category].append(info)
     for category in data:
         alphabetic = sorted(data[category], key=lambda d: d['title_yaml']) 
         data[category] = alphabetic
@@ -162,9 +162,9 @@ outdated: False
         f.write(not_sure_what_this_is)
 
 def main():
-    global category,title_key,title_text,markdown_url
+    global guide_category,title_key,title_text,markdown_url
     add_title_to_yaml(title_key,title_text)
-    add_title_to_index(title_key,title_text,category)
+    add_title_to_index(title_key,title_text,guide_category)
     handle_markdown_file(markdown_url,title_key,title_text)
 
 if __name__ == "__main__":
