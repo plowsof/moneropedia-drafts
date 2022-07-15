@@ -9,7 +9,7 @@ After scanning is complete, Monero should be removed or added to your balance. W
 
 ![Scan TXID GUI](https://raw.githubusercontent.com/plowsof/userguide-drafts/main/scan/scan_tx_1.png){:width="600px"}
 
-2) Enter the txid you want to scan and click OK.
+2) Enter the transaction ID you want to scan and click OK.
 
 ![Enter TXID GUI](https://raw.githubusercontent.com/plowsof/userguide-drafts/main/scan/scan_tx_2.png)
 
@@ -19,6 +19,6 @@ After scanning is complete, Monero should be removed or added to your balance. W
 
 ### Monero CLI
 
-1) With your wallet open, simply enter `scan_tx` followed by the txid you want to scan.
+1) With your wallet open, simply enter `scan_tx` followed by the transaction ID.
 
 ![Scan TXID CLI](https://raw.githubusercontent.com/plowsof/userguide-drafts/main/scan/scan_tx_4.png){:width="600px"}
