@@ -15,7 +15,7 @@ title_key = "some-new-guides" #This will end up as the file name / url "some-new
 markdown_url = "https://raw.githubusercontent.com/plowsof/userguide-drafts/main/i2p/monero-gui-i2p-node.md"
 ```
 
-###tip:
+### tip:
 title_text : in your markdown file do not include the main title, instead you put it here
 markdown_url : this has to be the 'raw' url
 
