@@ -1,0 +1,69 @@
+name: Pakage Linux GUI files for selsta
+
+on: 
+  workflow_dispatch:
+    inputs:
+      guifile:
+        description: 'URL of gui upload artifact'     
+        required: true
+      tag:
+        description: 'Tag version'
+        required: true
+        default: "v0.18.0.0"
+
+jobs:
+  packageGui:
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        TAG=${{ github.event.inputs.tag }}
+        GUIARTIFACT=${{ github.event.inputs.guifile }}
+      
+        wget "https://gui.xmr.pm/files/cli/${TAG}/monero-linux-x64-${TAG}.tar.bz2"
+        wget "https://github.com/monero-ecosystem/monero-GUI-guide/releases/download/v1.9/monero-gui-wallet-guide.pdf"
+        wget -O guifile.tar ${GUIARTIFACT}
+
+        #extract monero-wallet-gui and 'unused' monerod
+        tar -xvf guifile.tar
+
+        #create appimage
+        cat <<EOF >> monero-wallet-gui.AppImage
+        ./monero-wallet-gui
+        EOF
+
+        chmod -R 755 monero-wallet-gui.AppImage
+        chmod -R 755 monero-wallet-gui
+
+        tar -xvf "monero-linux-x64-${TAG}.tar.bz2"
+
+        mkdir -p monero-gui-${TAG}/extras
+
+        HEAD=monero-x86_64-linux-gnu-
+        mv ${HEAD}${TAG}/LICENSE monero-gui-${TAG}/.
+        mv ${HEAD}${TAG}/monerod monero-gui-${TAG}/.
+        rm ${HEAD}${TAG}/README.md
+        rm ${HEAD}${TAG}/ANONYMITY_NETWORKS.md
+
+        cp monero-gui-wallet-guide.pdf monero-gui-${TAG}/.
+        cp monero-wallet-gui monero-gui-${TAG}/.
+        cp monero-wallet-gui.AppImage monero-gui-${TAG}/.
+
+        chmod -R 644 monero-gui-${TAG}/monero-gui-wallet-guide.pdf 
+        chmod -R 644 monero-gui-${TAG}/LICENSE
+
+        for filename in ${HEAD}${TAG}/*; do
+          chmod -R 755 ${filename} 
+          mv ${filename} monero-gui-${TAG}/extras/. 
+        done
+
+        #print hashes
+        cd monero-gui-${TAG}
+        sha256sum monero-gui-${TAG}/*
+        sha256sum monero-gui-${TAG}/extras/*
+        cd extras
+        tar -cvjSf monero-gui-linux-x64-${TAG}.tar.bz2 monero-gui-${TAG}
+
+    - uses: actions/upload-artifact@v2
+      with:
+          name: monero-gui-linux-x64-${{ github.event.inputs.tag }}.tar.bz2
+          path: monero-gui-linux-x64-${{ github.event.inputs.tag }}.tar.bz2
