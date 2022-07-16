@@ -61,8 +61,7 @@ jobs:
           done
 
           #print hashes
-          sha256sum monero-gui-${TAG}/*
-          sha256sum monero-gui-${TAG}/extras/*
+          find monero-gui-${TAG} -type f -exec sha256sum {} \;
           tar -cvjSf monero-gui-linux-x64-${TAG}.tar.bz2 monero-gui-${TAG}
 
           - uses: actions/upload-artifact@v2
