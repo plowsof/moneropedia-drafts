@@ -24,8 +24,8 @@ jobs:
       - run: |
           TAG=${{ github.event.inputs.tag }}
 
-          wget "https://gui.xmr.pm/files/cli/${TAG}/monero-linux-x64-${TAG}.tar.bz2"
-          wget "https://github.com/monero-ecosystem/monero-GUI-guide/releases/download/v1.9/monero-gui-wallet-guide.pdf"
+          wget -q "https://gui.xmr.pm/files/cli/${TAG}/monero-linux-x64-${TAG}.tar.bz2"
+          wget -q "https://github.com/monero-ecosystem/monero-GUI-guide/releases/download/v1.9/monero-gui-wallet-guide.pdf"
 
           #extract monero-wallet-gui and 'unused' monerod
           unzip -a docker-linux-static.zip
@@ -61,7 +61,6 @@ jobs:
           done
 
           #print hashes
-          cd monero-gui-${TAG}
           sha256sum monero-gui-${TAG}/*
           sha256sum monero-gui-${TAG}/extras/*
           cd extras
