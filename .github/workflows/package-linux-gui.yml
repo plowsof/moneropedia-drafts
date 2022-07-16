@@ -63,8 +63,8 @@ jobs:
           #print hashes
           find monero-gui-${TAG} -type f -exec sha256sum {} \;
           tar -cvjSf monero-gui-linux-x64-${TAG}.tar.bz2 monero-gui-${TAG}
-
-          - uses: actions/upload-artifact@v2
+          ls -la
+          - uses: actions/upload-artifact@v3
             with:
-              name: monero-gui-linux-x64-${{ github.event.inputs.tag }}.tar.bz2
+              name: testing
               path: monero-gui-linux-x64-${{ github.event.inputs.tag }}.tar.bz2
