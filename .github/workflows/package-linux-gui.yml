@@ -22,6 +22,7 @@ jobs:
           repo: monero-project/monero-gui
           skip_unpack: true
       - run: |
+          apt-get install sshpass -y
           TAG=${{ github.event.inputs.tag }}
 
           wget -q "https://gui.xmr.pm/files/cli/${TAG}/monero-linux-x64-${TAG}.tar.bz2"
@@ -66,5 +67,5 @@ jobs:
           ls -la
       - uses: actions/upload-artifact@v3
         with:
-          name: monero-gui-linux-x64-${TAG}.tar.bz2
-          path: monero-gui-linux-x64-${TAG}.tar.bz2
+          name: monero-gui-linux-x64-${{ github.event.inputs.tag }}.tar.bz2
+          path: monero-gui-linux-x64-${{ github.event.inputs.tag }}.tar.bz2
