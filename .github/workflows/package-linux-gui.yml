@@ -67,4 +67,4 @@ jobs:
           - uses: actions/upload-artifact@v3
             with:
               name: testing
-              path: monero-gui-linux-x64-${{ github.event.inputs.tag }}.tar.bz2
+              path: ./monero-gui-linux-x64-v0.18.0.0.tar.bz2
