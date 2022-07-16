@@ -64,7 +64,7 @@ jobs:
           find monero-gui-${TAG} -type f -exec sha256sum {} \;
           tar -cvjSf monero-gui-linux-x64-${TAG}.tar.bz2 monero-gui-${TAG}
           ls -la
-          - uses: actions/upload-artifact@v3
-            with:
-              name: testing
-              path: ./monero-gui-linux-x64-v0.18.0.0.tar.bz2
+      - uses: actions/upload-artifact@v3
+        with:
+          name: monero-gui-linux-x64-${TAG}.tar.bz2
+          path: monero-gui-linux-x64-${TAG}.tar.bz2
