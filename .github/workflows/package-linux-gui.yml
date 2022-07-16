@@ -10,16 +10,13 @@ on:
         default: "v0.18.0.0"
 
 jobs:
-    getArtifact:
-      uses: dawidd6/action-download-artifact@v2
-      with:
-        workflow: build.yml
-        repo: monero-project/monero-gui
-        skip_unpack: true
-
-
-    packageGui:
-      runs-on: ubuntu-latest
-      steps:
-      - run: |
-          ls -la
+  packageGui:
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        - uses: dawidd6/action-download-artifact@v2.21.1
+        with:
+          workflow: build.yml
+          repo: monero-project/monero-gui
+          skip_unpack: true
+        ls -la
