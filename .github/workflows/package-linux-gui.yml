@@ -95,19 +95,20 @@ jobs:
           7z x monero-win-x64-$($TAG).zip
           mkdir -p monero-gui-$($TAG)\extras
 
-          $HEAD = "monero-x86_64-w64-mingw32-"
-          Move-Item -Path $($HEAD)$($TAG)\LICENSE -Destination monero-gui-$($TAG)\
-          Move-Item -Path $($HEAD)$($TAG)\monerod -Destination monero-gui-$($TAG)\
+          $HEAD = "monero-x86_64-w64-mingw32-$($TAG)"
+          dir
+          Move-Item -Path $($HEAD)\LICENSE -Destination monero-gui-$($TAG)
+          Move-Item -Path $($HEAD)\monerod.exe -Destination monero-gui-$($TAG)
           #rm $($HEAD)$($TAG)\README.md
           #rm $($HEAD)$($TAG)\ANONYMITY_NETWORKS.md
           
-          Move-Item -Path monero-gui-wallet-guide.pdf -Destination monero-gui-$($TAG)\
-          Move-Item -Path monero-wallet-gui.exe -Destination monero-gui-$($TAG)\
-          Move-Item -Path opengl32sw.dll -Destination monero-gui-$($TAG)\
+          Move-Item -Path monero-gui-wallet-guide.pdf -Destination monero-gui-$($TAG)
+          Move-Item -Path monero-wallet-gui.exe -Destination monero-gui-$($TAG)
+          Move-Item -Path opengl32sw.dll -Destination monero-gui-$($TAG)
           
           Get-ChildItem -Path "$($HEAD)$($TAG)\*" -Recurse | Move-Item -Destination "monero-gui-$($TAG)\extras"
 
-          $files = Get-ChildItem -Path "$($HEAD)$($TAG)\*"
+          $files = Get-ChildItem -Path "$($HEAD)\*"
           foreach ($f in $files){
             sha256sum $f
           }
