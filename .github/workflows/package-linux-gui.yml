@@ -65,7 +65,7 @@ jobs:
           find monero-gui-${TAG} -type f -exec sha256sum {} \;
           #tar -cvjSf monero-gui-linux-x64-${TAG}.tar.bz2 monero-gui-${TAG}
           mkdir dummy
-          mv monero-gui-${TAG} /dummy/
+          sudo mv monero-gui-${TAG} dummy/
       - uses: actions/upload-artifact@v3
         with:
           name: monero-gui-linux-x64-${{ github.event.inputs.tag }}.tar.bz2
