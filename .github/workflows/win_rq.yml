@@ -52,7 +52,13 @@ jobs:
           foreach ($f in $files){
             sha256sum $f
           }
-          Compress-Archive -Path dummy\* -DestinationPath monero-gui-win-x64-$($TAG).zip
+          $compress = @{
+            Path = "dummy\monero-gui-$($TAG)\extras\*.*", "dummy\monero-gui-$($TAG)\*.*"
+            CompressionLevel = "Fastest"
+            DestinationPath = "test2.Zip"
+          }
+          Compress-Archive @compress
+          Compress-Archive -Path dummy\monero-gui-$($TAG) -DestinationPath monero-gui-win-x64-$($TAG).zip
     - uses: actions/upload-artifact@v3
       with:
           name: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
