@@ -11,7 +11,7 @@ on:
         default: "v0.18.0.0"
 
 jobs:
-  packageGui:
+  packageLinux:
     runs-on: ubuntu-latest
     steps:
       - uses: dawidd6/action-download-artifact@v2.21.1
@@ -22,6 +22,7 @@ jobs:
           repo: monero-project/monero-gui
           skip_unpack: true
       - run: |
+          sudo apt-get install -y sshpass
           TAG=${{ github.event.inputs.tag }}
 
           wget -q "https://gui.xmr.pm/files/cli/${TAG}/monero-linux-x64-${TAG}.tar.bz2"
@@ -67,3 +68,21 @@ jobs:
         with:
           name: monero-gui-linux-x64-${{ github.event.inputs.tag }}.tar.bz2
           path: monero-gui-linux-x64-${{ github.event.inputs.tag }}.tar.bz2
+      - uses: actions/upload-artifact@v3
+        with:
+          name: docker-windows-static.zip
+          path: docker-windows-static.zip
+  
+  packageWindows:
+    runs-on: windows:latest
+    steps:
+      - uses: dawidd6/action-download-artifact@v2.21.1
+        with:
+          name: docker-windows-static.zip
+      - name: "extract win zip"
+        run: 7z x docker-windows-static.zip
+      - name: "create installer"
+        run: dir
+        
+    
+    
