@@ -91,13 +91,12 @@ jobs:
           #extract monero-wallet-gui and 'unused' monerod
           7z x docker-windows-static.zip
           
-          (
-          echo @echo off
-          echo Here is my second line\n
-          echo set QMLSCENE_DEVICE=softwarecontext\n
-          echo start /b monero-wallet-gui.exe
-          )>"start-low-graphics-mode.bat"
-
+          f="start-low-graphics-mode.bat"
+          echo "@echo off" > $fn
+          echo "Here is my second line\n" > $fn
+          echo "set QMLSCENE_DEVICE=softwarecontext\n" > $fn
+          echo "start /b monero-wallet-gui.exe" > $fn
+ 
           7zip x monero-win-x64-${TAG}.zip
           mkdir -p monero-gui-${TAG}/extras
 
