@@ -111,9 +111,8 @@ jobs:
           cp start-low-graphics-mode.bat monero-gui-${TAG}\.
           cp opengl32sw.dll monero-gui-${TAG}\.
           
-          for filename in ${HEAD}${TAG}\*; do
-            mv ${filename} monero-gui-${TAG}\extras\. 
-          done
+          FOR %i IN (${HEAD}${TAG}\*) DO mv %i monero-gui-${TAG}\extras\. 
+          
           #print hashes
           #find monero-gui-${TAG} -type f -exec sha256sum {} \;
 
