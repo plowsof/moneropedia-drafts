@@ -13,6 +13,7 @@ jobs:
   packageWindows:
     runs-on: windows-2019
     steps:
+    - uses: actions/checkout@v2
     - uses: dawidd6/action-download-artifact@v2.21.1
       with:
           workflow: build.yml
@@ -20,7 +21,6 @@ jobs:
           run_id: ${{ github.event.inputs.runid }}
           repo: monero-project/monero-gui
           skip_unpack: true
-    - uses: actions/checkout@v2
     - name: "extract win zip"
       run: 7z x docker-windows-static.zip
     - name: "create installer"
