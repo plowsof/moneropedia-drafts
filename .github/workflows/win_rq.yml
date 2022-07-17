@@ -1,0 +1,48 @@
+on: 
+workflow_dispatch:
+  inputs:
+    guifile:
+      description: 'run id'     
+      required: true
+      default: "2680356377"
+    tag:
+      description: 'Tag version'
+      required: true
+      default: "v0.18.0.0"
+jobs: 
+  packageWindows:
+    runs-on: windows-2019
+    steps:
+    - uses: actions/checkout@v2
+    - name: "extract win zip"
+      run: 7z x docker-windows-static.zip
+    - name: "create installer"
+      run: |
+          $TAG = "${{ github.event.inputs.tag }}"
+          Invoke-WebRequest -Uri "https://gui.xmr.pm/files/cli/$($TAG)/monero-win-x64-$($TAG).zip" -OutFile "monero-win-x64-$($TAG).zip"
+          Invoke-WebRequest -Uri "https://github.com/monero-ecosystem/monero-GUI-guide/releases/download/v1.9/monero-gui-wallet-guide.pdf" -OutFile "monero-gui-wallet-guide.pdf"
+
+          New-Item "start-low-graphics-mode.bat"
+          Set-Content "start-low-graphics-mode.bat" '@echo off\n\nset QMLSCENE_DEVICE=softwarecontext\n\nstart /b monero-wallet-gui.exe'
+
+          7z x monero-win-x64-$($TAG).zip
+          mkdir -p monero-gui-$($TAG)\extras
+          $HEAD = "monero-x86_64-w64-mingw32-$($TAG)"
+          dir
+          Move-Item -Path \$($HEAD)\LICENSE -Destination monero-gui-$($TAG)
+          Move-Item -Path \$($HEAD)\monerod.exe -Destination monero-gui-$($TAG)
+          #rm $($HEAD)$($TAG)\README.md
+          #rm $($HEAD)$($TAG)\ANONYMITY_NETWORKS.md
+
+          Move-Item -Path monero-gui-wallet-guide.pdf -Destination \monero-gui-$($TAG)
+          Move-Item -Path monero-wallet-gui.exe -Destination \monero-gui-$($TAG)
+          Move-Item -Path opengl32sw.dll -Destination \monero-gui-$($TAG)
+
+          Get-ChildItem -Path "$($HEAD)$($TAG)\*" -Recurse | Move-Item -Destination "monero-gui-$($TAG)\extras"
+
+          $files = Get-ChildItem -Path "$($HEAD)\*"
+          foreach ($f in $files){
+            sha256sum $f
+          }
+
+          7z a monero-gui-win-x64-$($TAG).zip .\monero-gui-$($TAG)\*
