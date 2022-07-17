@@ -90,7 +90,7 @@ jobs:
           Invoke-WebRequest -Uri "https://github.com/monero-ecosystem/monero-GUI-guide/releases/download/v1.9/monero-gui-wallet-guide.pdf" -OutFile "monero-gui-wallet-guide.pdf"
 
           New-Item "start-low-graphics-mode.bat"
-          Set-Content "start-low-graphics-mode.bat" '@echo off\n\nset QMLSCENE_DEVICE=softwarecontext\n\nstart /b monero-wallet-gui.exe'
+          Set-Content "start-low-graphics-mode.bat" '@echo off`r`n`r`nset QMLSCENE_DEVICE=softwarecontext`r`n`r`nstart /b monero-wallet-gui.exe'
 
           7z x monero-win-x64-$($TAG).zip
           mkdir -p dummy\monero-gui-$($TAG)\extras
