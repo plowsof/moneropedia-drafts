@@ -85,7 +85,7 @@ jobs:
           cd inno\installers\windows
           dir
           echo "RUN INNO"
-          Start-Process -FilePath $inno_cc -ArgumentList "Monero.iss"
+          start ISCC.exe Monero.iss
           echo "FNISHED INNO"
           
           
