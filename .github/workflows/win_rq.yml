@@ -46,11 +46,11 @@ jobs:
           Move-Item -Path monero-wallet-gui.exe -Destination monero-gui-$($TAG)
           Move-Item -Path opengl32sw.dll -Destination monero-gui-$($TAG)
 
-          Get-ChildItem -Path "$($HEAD)$($TAG)\*" -Recurse | Move-Item -Destination "monero-gui-$($TAG)\extras"
+          Get-ChildItem -Path "$($HEAD)\*" -Recurse | Move-Item -Destination "monero-gui-$($TAG)\extras"
 
           $files = Get-ChildItem -Path "$($HEAD)\*"
           foreach ($f in $files){
             sha256sum $f
           }
 
-          7z a monero-gui-win-x64-$($TAG).zip .\monero-gui-$($TAG)\*
+          7z a monero-gui-win-x64-$($TAG).zip monero-gui-$($TAG)\*
