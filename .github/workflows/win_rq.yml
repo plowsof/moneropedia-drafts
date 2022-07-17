@@ -79,7 +79,7 @@ jobs:
           $content[3] = $new_str
           $content | Set-Content $file
           
-          .\$($INNO_FILES)\ISCC.exe $file
+          Start-Process -FilePath “myprogram.exe” -ArgumentList $file
           
           #-mv "inno\installers\windows\Output\mysetup.exe" ".\monero-gui-install-win-x64-$($TAG).exe"
           
