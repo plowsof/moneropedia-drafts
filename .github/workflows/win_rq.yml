@@ -33,11 +33,13 @@ jobs:
           Invoke-WebRequest -Uri "https://gui.xmr.pm/files/cli/$($TAG)/monero-win-x64-$($TAG).zip" -OutFile "monero-win-x64-$($TAG).zip"
           Invoke-WebRequest -Uri "https://github.com/monero-ecosystem/monero-GUI-guide/releases/download/v1.9/monero-gui-wallet-guide.pdf" -OutFile "monero-gui-wallet-guide.pdf"
           New-Item "start-low-graphics-mode.bat"
-          $lowgfx = @"@echo off
+          $lowgfx = @"
+          @echo off
           
           set QMLSCENE_DEVICE=softwarecontext
           
-          start /b monero-wallet-gui.exe"@
+          start /b monero-wallet-gui.exe
+          "@
           
           Set-Content "start-low-graphics-mode.bat" $lowgfx
           
