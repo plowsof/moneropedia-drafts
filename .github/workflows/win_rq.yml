@@ -75,7 +75,7 @@ jobs:
           $file = 'inno\installers\windows\Monero.iss'
           $strip_v = $TAG.substring(1,$TAG.length - 1)
           $content = Get-Content $file
-          $new_str = '#define GuiVersion "$($strip_v)"'
+          $new_str = '#define GuiVersion "' + $strip_v + '"'
           $content[3] = $new_str
           $content | Set-Content $file
           
