@@ -48,22 +48,9 @@ jobs:
           Move-Item -Path opengl32sw.dll -Destination $dest
           Move-Item -path start-low-graphics-mode.bat -Destination $dest
           Get-ChildItem -Path "$($HEAD)\*" -Recurse | Move-Item -Destination "dummy\monero-gui-$($TAG)\extras"
-          $files = Get-ChildItem -Path "$($HEAD)\*"
-          foreach ($f in $files){
-            sha256sum $f
-          }
-          $compress = @{
-            Path = "dummy\"
-            CompressionLevel = "Fastest"
-            DestinationPath = "test2.Zip"
-          }
-          Compress-Archive @compress
-          Compress-Archive -Path dummy\monero-gui-$($TAG) -DestinationPath monero-gui-win-x64-$($TAG).zip
+          #Compress-Archive -Path dummy\monero-gui-$($TAG) -DestinationPath monero-gui-win-x64-$($TAG).zip
     - uses: actions/upload-artifact@v3
       with:
           name: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
-          path: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
-    - uses: actions/upload-artifact@v3
-      with:
-          name: test2.zip
-          path: test2.zip
+          path: ./dummy
+
