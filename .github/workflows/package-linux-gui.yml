@@ -96,6 +96,7 @@ jobs:
           mkdir -p monero-gui-$($TAG)\extras
 
           $HEAD = "monero-x86_64-w64-mingw32-"
+
           mv $($HEAD)$($TAG)\LICENSE monero-gui-$($TAG)\.
           mv $($HEAD)$($TAG)\monerod monero-gui-$($TAG)\.
           rm $($HEAD)$($TAG)\README.md
@@ -106,10 +107,9 @@ jobs:
           cp start-low-graphics-mode.bat monero-gui-$($TAG)\.
           cp opengl32sw.dll monero-gui-$($TAG)\.
           
-          $files = Get-ChildItem " $($HEAD)$($TAG)\"
-          foreach ($f in $files){
-            mv $f monero-gui-$($TAG)\extras\.
-          }
+          Get-ChildItem -Path "$($HEAD)$($TAG)\*" -Recurse | Move-Item -Destination "monero-gui-$($TAG)\extras"
+
+          $files = Get-ChildItem -Path "$($HEAD)$($TAG)\*"
           foreach ($f in $files){
             sha256sum $f
           }
