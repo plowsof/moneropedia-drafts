@@ -114,8 +114,8 @@ jobs:
           foreach ($f in $files){
             sha256sum $f
           }
-
-          7z a monero-gui-win-x64-$($TAG).zip .\dummy\*
+          cd dummy
+          7z a -r ../monero-gui-win-x64-$($TAG).zip *
     - uses: actions/upload-artifact@v3
       with:
           name: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
