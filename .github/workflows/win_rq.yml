@@ -1,14 +1,14 @@
 on: 
-workflow_dispatch:
-  inputs:
-    guifile:
-      description: 'run id'     
-      required: true
-      default: "2680356377"
-    tag:
-      description: 'Tag version'
-      required: true
-      default: "v0.18.0.0"
+  workflow_dispatch:
+    inputs:
+      guifile:
+        description: 'run id'     
+        required: true
+        default: "2680356377"
+      tag:
+        description: 'Tag version'
+        required: true
+        default: "v0.18.0.0"
 jobs: 
   packageWindows:
     runs-on: windows-2019
