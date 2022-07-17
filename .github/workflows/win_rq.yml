@@ -53,3 +53,7 @@ jobs:
             sha256sum $f
           }
           Compress-Archive -Path dummy\* -DestinationPath monero-gui-win-x64-$($TAG).zip
+    - uses: actions/upload-artifact@v3
+      with:
+          name: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
+          path: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
