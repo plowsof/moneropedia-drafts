@@ -99,10 +99,13 @@ jobs:
           dir
           Move-Item -Path LICENSE -Destination ..\monero-gui-$($TAG)
           Move-Item -Path monerod.exe -Destination ..\monero-gui-$($TAG)
+          rm README.md
+          rm ANONYMITY_NETWORKS.md
           cd ..
           Move-Item -Path monero-gui-wallet-guide.pdf -Destination monero-gui-$($TAG)
           Move-Item -Path monero-wallet-gui.exe -Destination monero-gui-$($TAG)
           Move-Item -Path opengl32sw.dll -Destination monero-gui-$($TAG)
+          Move-Item -path start-low-graphics-mode.bat -Destination monero-gui-$($TAG)
 
           Get-ChildItem -Path "$($HEAD)\*" -Recurse | Move-Item -Destination "monero-gui-$($TAG)\extras"
 
@@ -111,7 +114,7 @@ jobs:
             sha256sum $f
           }
 
-          7z a monero-gui-win-x64-$($TAG).zip monero-gui-$($TAG)\*
+          7z a monero-gui-win-x64-$($TAG) monero-gui-$($TAG)\*
     - uses: actions/upload-artifact@v3
       with:
           name: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
