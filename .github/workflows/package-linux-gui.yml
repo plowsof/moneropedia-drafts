@@ -85,41 +85,41 @@ jobs:
       run: 7z x docker-windows-static.zip
     - name: "create installer"
       run: |
-          $TAG = ${{ github.event.inputs.tag }}
+          $TAG = "${{ github.event.inputs.tag }}"
           wget -q "https://gui.xmr.pm/files/cli/${TAG}/monero-win-x64-${TAG}.zip"
           wget -q "https://github.com/monero-ecosystem/monero-GUI-guide/releases/download/v1.9/monero-gui-wallet-guide.pdf"
           #extract monero-wallet-gui and 'unused' monerod
           7z x docker-windows-static.zip
           
-          f="start-low-graphics-mode.bat"
-          echo "@echo off" > $fn
-          echo "Here is my second line\n" >> $fn
-          echo "set QMLSCENE_DEVICE=softwarecontext\n" >> $fn
-          echo "start /b monero-wallet-gui.exe" >> $fn
+          $f="start-low-graphics-mode.bat"
+          echo "@echo off" > $f
+          echo "Here is my second line\n" >> $f
+          echo "set QMLSCENE_DEVICE=softwarecontext\n" >> $f
+          echo "start /b monero-wallet-gui.exe" >> $f
  
           7zip x monero-win-x64-${TAG}.zip
           mkdir -p monero-gui-${TAG}/extras
 
-          HEAD=monero-x86_64-w64-mingw32-
-          mv ${HEAD}${TAG}\LICENSE monero-gui-${TAG}/.
-          mv ${HEAD}${TAG}\monerod monero-gui-${TAG}/.
-          rm ${HEAD}${TAG}\README.md
-          rm ${HEAD}${TAG}\ANONYMITY_NETWORKS.md
+          $HEAD = "monero-x86_64-w64-mingw32-"
+          mv $($HEAD)$($TAG)\LICENSE monero-gui-$($TAG)/.
+          mv $($HEAD)$($TAG)\monerod monero-gui-$($TAG)/.
+          rm $($HEAD)$($TAG)\README.md
+          rm $($HEAD)$($TAG)\ANONYMITY_NETWORKS.md
 
-          cp monero-gui-wallet-guide.pdf monero-gui-${TAG}\.
-          cp monero-wallet-gui.exe monero-gui-${TAG}\.
-          cp start-low-graphics-mode.bat monero-gui-${TAG}\.
-          cp opengl32sw.dll monero-gui-${TAG}\.
+          cp monero-gui-wallet-guide.pdf monero-gui-$($TAG)\.
+          cp monero-wallet-gui.exe monero-gui-$($TAG)\.
+          cp start-low-graphics-mode.bat monero-gui-$($TAG)\.
+          cp opengl32sw.dll monero-gui-$($TAG)\.
           
-          $files = Get-ChildItem "${HEAD}${TAG}\"
+          $files = Get-ChildItem " $($HEAD)$($TAG)\"
           foreach ($f in $files){
-            mv $f monero-gui-${TAG}\extras\.
+            mv $f monero-gui-$($TAG)\extras\.
           }
           foreach ($f in $files){
             sha256sum $f
           }
 
-          7z a monero-gui-win-x64-${TAG}.zip .\monero-gui-${TAG}\*
+          7z a monero-gui-win-x64-$($TAG).zip .\monero-gui-$($TAG)\*
     - uses: actions/upload-artifact@v3
       with:
           name: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
