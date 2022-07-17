@@ -88,11 +88,7 @@ jobs:
           echo "RUN INNO"
           .\ISCC.exe Monero.iss
           echo "FNISHED INNO"
-          
-          
-          
-          #-mv "inno\installers\windows\Output\mysetup.exe" ".\monero-gui-install-win-x64-$($TAG).exe"
-          
+        
     - uses: actions/upload-artifact@v3
       with:
           name: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
