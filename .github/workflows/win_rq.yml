@@ -53,7 +53,7 @@ jobs:
             sha256sum $f
           }
           $compress = @{
-            Path = "dummy\monero-gui-$($TAG)\extras\*.*", "dummy\monero-gui-$($TAG)\*.*"
+            Path = "dummy\"
             CompressionLevel = "Fastest"
             DestinationPath = "test2.Zip"
           }
@@ -63,3 +63,7 @@ jobs:
       with:
           name: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
           path: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
+    - uses: actions/upload-artifact@v3
+      with:
+          name: test2.zip
+          path: test2.zip
