@@ -22,7 +22,9 @@ jobs:
           repo: monero-project/monero-gui
           skip_unpack: true
     - name: "extract win zip"
-      run: 7z x docker-windows-static.zip
+      run: |
+        dir
+        7z x docker-windows-static.zip
     - name: "create installer"
       run: |
           $TAG = "${{ github.event.inputs.tag }}"
