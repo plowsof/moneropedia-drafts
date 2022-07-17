@@ -94,11 +94,10 @@ jobs:
  
           7z x monero-win-x64-$($TAG).zip
           mkdir -p monero-gui-$($TAG)\extras
-
           $HEAD = "monero-x86_64-w64-mingw32-$($TAG)"
           dir
-          Move-Item -Path $($HEAD)\LICENSE -Destination monero-gui-$($TAG)
-          Move-Item -Path $($HEAD)\monerod.exe -Destination monero-gui-$($TAG)
+          Move-Item -Path .\$($HEAD)\LICENSE -Destination monero-gui-$($TAG)
+          Move-Item -Path .\$($HEAD)\monerod.exe -Destination monero-gui-$($TAG)
           #rm $($HEAD)$($TAG)\README.md
           #rm $($HEAD)$($TAG)\ANONYMITY_NETWORKS.md
           
