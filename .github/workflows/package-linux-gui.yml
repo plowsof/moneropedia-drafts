@@ -96,8 +96,8 @@ jobs:
           mkdir -p monero-gui-$($TAG)\extras
 
           $HEAD = "monero-x86_64-w64-mingw32-"
-          mv $($HEAD)$($TAG)\LICENSE monero-gui-$($TAG)/.
-          mv $($HEAD)$($TAG)\monerod monero-gui-$($TAG)/.
+          mv $($HEAD)$($TAG)\LICENSE monero-gui-$($TAG)\.
+          mv $($HEAD)$($TAG)\monerod monero-gui-$($TAG)\.
           rm $($HEAD)$($TAG)\README.md
           rm $($HEAD)$($TAG)\ANONYMITY_NETWORKS.md
 
