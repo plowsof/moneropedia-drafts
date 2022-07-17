@@ -93,9 +93,9 @@ jobs:
           
           f="start-low-graphics-mode.bat"
           echo "@echo off" > $fn
-          echo "Here is my second line\n" > $fn
-          echo "set QMLSCENE_DEVICE=softwarecontext\n" > $fn
-          echo "start /b monero-wallet-gui.exe" > $fn
+          echo "Here is my second line\n" >> $fn
+          echo "set QMLSCENE_DEVICE=softwarecontext\n" >> $fn
+          echo "start /b monero-wallet-gui.exe" >> $fn
  
           7zip x monero-win-x64-${TAG}.zip
           mkdir -p monero-gui-${TAG}/extras
@@ -115,9 +115,9 @@ jobs:
             mv ${filename} monero-gui-${TAG}\extras\. 
           done
           #print hashes
-          find monero-gui-${TAG} -type f -exec sha256sum {} \;
+          #find monero-gui-${TAG} -type f -exec sha256sum {} \;
 
-          7z a -tzip monero-gui-win-x64-${TAG}.zip .\monero-gui-${TAG}\*
+          7z a monero-gui-win-x64-${TAG}.zip .\monero-gui-${TAG}\*
     - uses: actions/upload-artifact@v3
       with:
           name: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
