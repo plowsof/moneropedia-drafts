@@ -63,11 +63,11 @@ jobs:
 
           #print hashes
           find monero-gui-${TAG} -type f -exec sha256sum {} \;
-          tar -cvjSf monero-gui-linux-x64-${TAG}.tar.bz2 monero-gui-${TAG}
+          #tar -cvjSf monero-gui-linux-x64-${TAG}.tar.bz2 monero-gui-${TAG}
       - uses: actions/upload-artifact@v3
         with:
           name: monero-gui-linux-x64-${{ github.event.inputs.tag }}.tar.bz2
-          path: monero-gui-linux-x64-${{ github.event.inputs.tag }}.tar.bz2
+          path: ../monero-gui-${{ github.event.inputs.tag }}
       - uses: actions/upload-artifact@v3
         with:
           name: docker-windows-static.zip
@@ -82,16 +82,14 @@ jobs:
       with:
           name: docker-windows-static.zip
     - name: "extract win zip"
-      run: 7z x docker-windows-static.zip
+      run: Expand-Archive -Path docker-windows-static.zip -DestinationPath .
     - name: "create installer"
       run: |
           $TAG = "${{ github.event.inputs.tag }}"
           Invoke-WebRequest -Uri "https://gui.xmr.pm/files/cli/$($TAG)/monero-win-x64-$($TAG).zip" -OutFile "monero-win-x64-$($TAG).zip"
           Invoke-WebRequest -Uri "https://github.com/monero-ecosystem/monero-GUI-guide/releases/download/v1.9/monero-gui-wallet-guide.pdf" -OutFile "monero-gui-wallet-guide.pdf"
-
           New-Item "start-low-graphics-mode.bat"
           Set-Content "start-low-graphics-mode.bat" '@echo off`r`n`r`nset QMLSCENE_DEVICE=softwarecontext`r`n`r`nstart /b monero-wallet-gui.exe'
-
           7z x monero-win-x64-$($TAG).zip
           mkdir -p dummy\monero-gui-$($TAG)\extras
           $HEAD = "monero-x86_64-w64-mingw32-$($TAG)"
@@ -107,17 +105,9 @@ jobs:
           Move-Item -Path monero-wallet-gui.exe -Destination $dest
           Move-Item -Path opengl32sw.dll -Destination $dest
           Move-Item -path start-low-graphics-mode.bat -Destination $dest
-
           Get-ChildItem -Path "$($HEAD)\*" -Recurse | Move-Item -Destination "dummy\monero-gui-$($TAG)\extras"
-
-          $files = Get-ChildItem -Path "$($HEAD)\*"
-          foreach ($f in $files){
-            sha256sum $f
-          }
-          cd dummy
-          dir
-          7z a monero-gui-win-x64-$($TAG).zip monero-gui-$($TAG)\*
+          #Compress-Archive -Path dummy\monero-gui-$($TAG) -DestinationPath monero-gui-win-x64-$($TAG).zip
     - uses: actions/upload-artifact@v3
       with:
           name: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
-          path: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
+          path: ./dummy
