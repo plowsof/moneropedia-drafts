@@ -111,10 +111,14 @@ jobs:
           cp start-low-graphics-mode.bat monero-gui-${TAG}\.
           cp opengl32sw.dll monero-gui-${TAG}\.
           
-          FOR %i IN (${HEAD}${TAG}\*) DO mv %i monero-gui-${TAG}\extras\. 
+          FOR %i IN (${HEAD}${TAG}\*) DO ( 
+            mv %i monero-gui-${TAG}\extras\.
+          )  
           
           #print hashes
-          #find monero-gui-${TAG} -type f -exec sha256sum {} \;
+          FOR %i IN (${HEAD}${TAG}\*) DO ( 
+            sha256sum %i
+          )  
 
           7z a monero-gui-win-x64-${TAG}.zip .\monero-gui-${TAG}\*
     - uses: actions/upload-artifact@v3
