@@ -85,7 +85,7 @@ jobs:
       run: 7z x docker-windows-static.zip
     - name: "create installer"
       run: |
-          TAG=${{ github.event.inputs.tag }}
+          $TAG = ${{ github.event.inputs.tag }}
           wget -q "https://gui.xmr.pm/files/cli/${TAG}/monero-win-x64-${TAG}.zip"
           wget -q "https://github.com/monero-ecosystem/monero-GUI-guide/releases/download/v1.9/monero-gui-wallet-guide.pdf"
           #extract monero-wallet-gui and 'unused' monerod
