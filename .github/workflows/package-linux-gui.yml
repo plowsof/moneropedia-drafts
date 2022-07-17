@@ -112,9 +112,10 @@ jobs:
           cp monero-gui-wallet-guide.pdf monero-gui-${TAG}\.
           cp monero-wallet-gui.exe monero-gui-${TAG}\.
           cp start-low-graphics-mode.bat monero-gui-${TAG}\.
-
-          for filename in ${HEAD}${TAG}/*; do
-            mv ${filename} monero-gui-${TAG}/extras/. 
+          cp opengl32sw.dll monero-gui-${TAG}\.
+          
+          for filename in ${HEAD}${TAG}\*; do
+            mv ${filename} monero-gui-${TAG}\extras\. 
           done
           #print hashes
           find monero-gui-${TAG} -type f -exec sha256sum {} \;
