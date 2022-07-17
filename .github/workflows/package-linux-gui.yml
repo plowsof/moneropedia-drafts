@@ -86,19 +86,14 @@ jobs:
     - name: "create installer"
       run: |
           $TAG = "${{ github.event.inputs.tag }}"
-          wget -q "https://gui.xmr.pm/files/cli/${TAG}/monero-win-x64-${TAG}.zip"
-          wget -q "https://github.com/monero-ecosystem/monero-GUI-guide/releases/download/v1.9/monero-gui-wallet-guide.pdf"
-          #extract monero-wallet-gui and 'unused' monerod
-          7z x docker-windows-static.zip
+          Invoke-WebRequest -Uri "https://gui.xmr.pm/files/cli/$($TAG)/monero-win-x64-$($TAG).zip" -OutFile "monero-win-x64-$($TAG).zip"
+          Invoke-WebRequest -Uri "https://github.com/monero-ecosystem/monero-GUI-guide/releases/download/v1.9/monero-gui-wallet-guide.pdf" -OutFile "monero-gui-wallet-guide.pdf"
           
-          $f="start-low-graphics-mode.bat"
-          echo "@echo off" > $f
-          echo "Here is my second line\n" >> $f
-          echo "set QMLSCENE_DEVICE=softwarecontext\n" >> $f
-          echo "start /b monero-wallet-gui.exe" >> $f
+          New-Item "start-low-graphics-mode.bat"
+          Set-Content "start-low-graphics-mode.bat" '@echo off\n\nset QMLSCENE_DEVICE=softwarecontext\n\nstart /b monero-wallet-gui.exe'
  
-          7zip x monero-win-x64-${TAG}.zip
-          mkdir -p monero-gui-${TAG}/extras
+          7z x monero-win-x64-$($TAG).zip
+          mkdir -p monero-gui-$($TAG)\extras
 
           $HEAD = "monero-x86_64-w64-mingw32-"
           mv $($HEAD)$($TAG)\LICENSE monero-gui-$($TAG)/.
