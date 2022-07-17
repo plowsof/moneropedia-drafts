@@ -114,7 +114,7 @@ jobs:
             sha256sum $f
           }
 
-          7z a monero-gui-win-x64-$($TAG) monero-gui-$($TAG)\*
+          7z a monero-gui-win-x64-$($TAG).zip monero-gui-$($TAG)\
     - uses: actions/upload-artifact@v3
       with:
           name: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
