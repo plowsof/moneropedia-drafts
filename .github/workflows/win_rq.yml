@@ -79,10 +79,15 @@ jobs:
           $content[3] = $new_str
           $content | Set-Content $file
           
-          $inno_cc = "helper-scripts\inno_setup\ISCC.exe"
-          Start-Process -FilePath $inno_cc -ArgumentList $file
+          Copy-Item -Path "helper-scripts\inno_setup\*" -Destination "inno\installers\windows" -Recurse
+          $inno_cc = "ISCC.exe"
           
-          cd inno\installers\windows\bin; dir; cd ..; dir
+          cd inno\installers\windows
+          dir
+          echo "RUN INNO"
+          Start-Process -FilePath $inno_cc -ArgumentList "Monero.iss"
+          echo "FNISHED INNO"
+          
           
           
           #-mv "inno\installers\windows\Output\mysetup.exe" ".\monero-gui-install-win-x64-$($TAG).exe"
