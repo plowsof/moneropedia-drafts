@@ -96,16 +96,14 @@ jobs:
           mkdir -p monero-gui-$($TAG)\extras
 
           $HEAD = "monero-x86_64-w64-mingw32-"
-
-          mv $($HEAD)$($TAG)\LICENSE monero-gui-$($TAG)\.
-          mv $($HEAD)$($TAG)\monerod monero-gui-$($TAG)\.
-          rm $($HEAD)$($TAG)\README.md
-          rm $($HEAD)$($TAG)\ANONYMITY_NETWORKS.md
-
-          cp monero-gui-wallet-guide.pdf monero-gui-$($TAG)\.
-          cp monero-wallet-gui.exe monero-gui-$($TAG)\.
-          cp start-low-graphics-mode.bat monero-gui-$($TAG)\.
-          cp opengl32sw.dll monero-gui-$($TAG)\.
+          Move-Item -Path $($HEAD)$($TAG)\LICENSE -Destination monero-gui-$($TAG)
+          Move-Item -Path $($HEAD)$($TAG)\monerod -Destination monero-gui-$($TAG)
+          #rm $($HEAD)$($TAG)\README.md
+          #rm $($HEAD)$($TAG)\ANONYMITY_NETWORKS.md
+          
+          Move-Item -Path monero-gui-wallet-guide.pdf -Destination monero-gui-$($TAG)
+          Move-Item -Path monero-wallet-gui.exe -Destination monero-gui-$($TAG)
+          Move-Item -Path opengl32sw.dll -Destination monero-gui-$($TAG)
           
           Get-ChildItem -Path "$($HEAD)$($TAG)\*" -Recurse | Move-Item -Destination "monero-gui-$($TAG)\extras"
 
