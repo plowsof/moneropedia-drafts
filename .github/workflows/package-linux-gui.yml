@@ -90,15 +90,13 @@ jobs:
           wget -q "https://github.com/monero-ecosystem/monero-GUI-guide/releases/download/v1.9/monero-gui-wallet-guide.pdf"
           #extract monero-wallet-gui and 'unused' monerod
           7z x docker-windows-static.zip
-
-          #create bat
-          cat <<EOF >> start-low-graphics-mode.bat
-          @echo off
-
-          set QMLSCENE_DEVICE=softwarecontext
-
-          start /b monero-wallet-gui.exe
-          EOF
+          
+          (
+          echo @echo off
+          echo Here is my second line\n
+          echo set QMLSCENE_DEVICE=softwarecontext\n
+          echo start /b monero-wallet-gui.exe
+          )>"start-low-graphics-mode.bat"
 
           7zip x monero-win-x64-${TAG}.zip
           mkdir -p monero-gui-${TAG}/extras
