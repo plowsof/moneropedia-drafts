@@ -84,6 +84,7 @@ jobs:
           
           cd inno\installers\windows
           dir
+          type Monero.iss
           echo "RUN INNO"
           .\ISCC.exe Monero.iss
           echo "FNISHED INNO"
