@@ -75,9 +75,8 @@ jobs:
           $file = 'inno\installers\windows\Monero.iss'
           $strip_v = $TAG.substring(1,$TAG.length - 1)
           $content = Get-Content $file
-          $old_str = '#define GuiVersion GetFileVersion("bin\monero-wallet-gui.exe")'
           $new_str = '#define GuiVersion "$($strip_v)"'
-          $content[3] = -replace $old_str, $new_str
+          $content[3] = $new_str
           $content | Set-Content $file
           
           .\$($INNO_FILES)\ISCC.exe $file
