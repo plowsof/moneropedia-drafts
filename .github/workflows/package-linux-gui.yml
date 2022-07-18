@@ -130,6 +130,7 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
+        path: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
     - uses: actions/download-artifact@v3
       with:
         name: monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe.zip
@@ -145,7 +146,7 @@ jobs:
           wget -q "https://github.com/monero-ecosystem/monero-GUI-guide/releases/download/v1.9/monero-gui-wallet-guide.pdf"
 
           #extract monero-wallet-gui and 'unused' monerod
-          unzip -a docker-linux-static.zip
+          #unzip -a docker-linux-static.zip
 
           #create appimage
           cat <<EOF >> monero-wallet-gui.AppImage
@@ -185,12 +186,10 @@ jobs:
           
           #mkdir uploadme
           cp monero-gui-win-x64-${TAG}.zip uploadme/.
-          #Extract the zip and upload the exe
-          unzip -a monero-gui-install-win-x64-${TAG}.exe.zip
           cp monero-gui-install-win-x64-${TAG}.exe uploadme/.
           cd dummy
           tar -cvjSf monero-gui-linux-x64-${TAG}.tar.bz2 monero-gui-${TAG}
-          #cp monero-gui-linux-x64-${TAG}.tar.bz2 ../uploadme/.
+          cp monero-gui-linux-x64-${TAG}.tar.bz2 ../uploadme/.
           cd ..
           
           ls uploadme/*
