@@ -146,7 +146,7 @@ jobs:
           wget -q "https://github.com/monero-ecosystem/monero-GUI-guide/releases/download/v1.9/monero-gui-wallet-guide.pdf"
 
           #extract monero-wallet-gui and 'unused' monerod
-          #unzip -a docker-linux-static.zip
+          unzip -a docker-linux-static.zip
 
           #create appimage
           cat <<EOF >> monero-wallet-gui.AppImage
