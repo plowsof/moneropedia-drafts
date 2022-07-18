@@ -27,7 +27,7 @@ jobs:
       run: |
           #Known hashes ~ files installed from innosetup-6.2.1.exe
           $path_inno_files = "helper-scripts\inno_setup"
-          $path_opengl = "."
+          $path_opengl = ""
           
           (Get-FileHash $path_inno_files\Default.isl -Algorithm "SHA256") -eq "179da3422d7bbb65bb2052f9c0b370ab66ddd6f24693d90accbd7d7d73d4f1a4"
           (Get-FileHash $path_inno_files\ISCC.exe -Algorithm "SHA256") -eq "0d02e30a6ad432a50eb86f1ecf330147046e671de340bcb43a170fecbd19bf51"
@@ -37,7 +37,7 @@ jobs:
           (Get-FileHash $path_inno_files\Setup.e32 -Algorithm "SHA256") -eq "088622096c373250d04e46de5cda072a921a89900c57988bbe52f1e308e48043"
           (Get-FileHash $path_inno_files\SetupLdr.e32 -Algorithm "SHA256") -eq "86154d725c21660f220e957eb6dcaf73ca609eef486dcdce6d5d7c286abd03d5"
           (Get-FileHash $path_inno_files\ISPP.dll -Algorithm "SHA256") -eq "1be06b60090221d7a7d236d374ab4ff7e6a56013107f806be4bea2b79dad3703"
-          (Get-FileHash $path_to_opengl\opengl32sw.dll -Algorithm "SHA256") -eq "963641a718f9cae2705d5299eae9b7444e84e72ab3bef96a691510dd05fa1da4"
+          (Get-FileHash $path_to_openglopengl32sw.dll -Algorithm "SHA256") -eq "963641a718f9cae2705d5299eae9b7444e84e72ab3bef96a691510dd05fa1da4"
 
           $TAG = "${{ github.event.inputs.tag }}"
           $INNO_FILES = "helper-scripts\inno_setup\"
