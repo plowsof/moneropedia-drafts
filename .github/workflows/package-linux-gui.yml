@@ -114,6 +114,14 @@ jobs:
           #Set-SCPFile -ComputerName 'SCPSERVERHERE' -Credential $credential -RemotePath '/someLinuxFolder/file' -LocalFile 'C:\MyFolder\file'
           #Set-SCPFolder -ComputerName 'SCPSERVERHERE' -Credential $credential -LocalFolder 'C:\MyFolder' -RemoteFolder '/someLinuxFolder'
           #Send-PowerShellServerFile -Server YourServer -AuthMode password -User MyUser -Password MyPassword -RemoteFile C:\temp\test.txt -LocalFile C:\downloads\test.txt
+          
+          Compress-Archive -Path dummy -DestinationPath monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
+
+    - uses: actions/cache@v3
+      with:
+          path: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
+          key: gui_win_zip
+          
     - uses: actions/upload-artifact@v3
       with:
           name: monero-gui-win-x64-${{ github.event.inputs.tag }}
@@ -132,17 +140,16 @@ jobs:
     needs: packageWindows
     steps:
     - uses: actions/checkout@v2
-    - uses: dawidd6/action-download-artifact@v2.21.1
-      with:
-        workflow: package-linux-gui.yml
-        skip_unpack: true
-        name: monero-gui-win-x64-${{ github.event.inputs.tag }}
     - uses: actions/download-artifact@v3
       with:
         name: monero-gui-install-win-x64-${{ github.event.inputs.tag }}
     - uses: actions/download-artifact@v3
       with:
         name: docker-linux-static
+    - uses: actions/cache@v3
+      with:
+        path: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
+        key: gui_win_zip
     - run: |
           echo "CHECK ENV"
           ls -la
@@ -191,7 +198,7 @@ jobs:
           sudo mv monero-gui-${TAG} dummy/
           
           mkdir uploadme
-          cp monero-gui-win-x64-${TAG}.zip.zip uploadme/.
+          cp monero-gui-win-x64-${TAG}.zip uploadme/.
           cp monero-gui-install-win-x64-${TAG}.exe uploadme/.
           cd dummy
           tar -cvjSf monero-gui-linux-x64-${TAG}.tar.bz2 monero-gui-${TAG}
