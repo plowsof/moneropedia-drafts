@@ -111,11 +111,11 @@ jobs:
         
     - uses: actions/upload-artifact@v3
       with:
-          name: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
+          name: monero-gui-win-x64-${{ github.event.inputs.tag }}
           path: ./dummy
     - uses: actions/upload-artifact@v3
       with:
-          name: monero-gui-install-win-x64-${{ github.event.inputs.tag }}.zip
+          name: monero-gui-install-win-x64-${{ github.event.inputs.tag }}
           path: ./inno/installers/windows/Output/monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe
     - uses: actions/upload-artifact@v3
       with:
@@ -130,8 +130,8 @@ jobs:
     - uses: dawidd6/action-download-artifact@v2.21.1
       with:
         workflow: package-linux-gui.yml
-        skip_unpack: false
-        name: monero-gui-win-x64-${{ github.event.inputs.tag }}
+        skip_unpack: true
+        name: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
     - uses: actions/download-artifact@v3
       with:
         name: monero-gui-install-win-x64-${{ github.event.inputs.tag }}.zip
