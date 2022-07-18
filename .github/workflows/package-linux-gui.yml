@@ -185,7 +185,7 @@ jobs:
           mkdir dummy
           sudo mv monero-gui-${TAG} dummy/
           
-          #mkdir uploadme
+          mkdir uploadme
           cp monero-gui-win-x64-${TAG}.zip.zip uploadme/.
           cp monero-gui-install-win-x64-${TAG}.exe uploadme/.
           cd dummy
