@@ -121,3 +121,11 @@ jobs:
   
     - name: "Create monero-gui-win-x64-${{ github.event.inputs.tag }}.zip"
       run: Compress-Archive -Path .\dummy\* -DestinationPath uploadme\monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
+    
+    - name: "Upload files using SCP"
+      run: |
+        Install-Module -Name Posh-SSH
+        Set-SCPItem -ComputerName$ ${{ secrets.SCP_SERVER }} \
+        -KeyString ${{ secrets.SSH_KEY }} -AcceptKey \
+        -Credential ${{ secrets.USER }} \
+        -Path .\uploadme -Destination /tmp -Verbose
