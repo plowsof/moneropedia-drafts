@@ -115,8 +115,8 @@ jobs:
 
           cd inno\installers\windows
           .\ISCC.exe Monero.iss
-          
-          Move-Item -Path Output\mysetup.exe -Destination $($HOMEDIR)\uploadme\monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe
+          $out = $HOMEDIR + "\uploadme\monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe"
+          Move-Item -Path Output\mysetup.exe -Destination $out
           cd $HOMEDIR
   
     - name: "Create monero-gui-win-x64-${{ github.event.inputs.tag }}.zip"
