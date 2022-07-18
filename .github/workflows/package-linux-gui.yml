@@ -117,13 +117,14 @@ jobs:
           path: ./inno/installers/windows/Output/mysetup.exe
     - uses: actions/upload-artifact@v3
       with:
-          name: docker-linux.zip
-          path: docker-linux.zip
+          name: docker-linux-static.zip
+          path: docker-linux-static.zip
           
   packageLinux:
     runs-on: ubuntu-latest
     needs: packageWindows
     steps:
+    - uses: actions/checkout@v2
     - uses: actions/download-artifact@v3
       with:
         name: | 
@@ -181,7 +182,7 @@ jobs:
           tar -cvjSf monero-gui-linux-x64-${TAG}.tar.bz2 monero-gui-${TAG}
           cp monero-gui-linux-x64-${TAG}.tar.bz2 uploadme\.
           
-          dir uploadme\
+          ls -la uploadme/
           
           #$ scp -r uploadme user@host.com:/var/www/html/target_dir
     - uses: actions/upload-artifact@v3
