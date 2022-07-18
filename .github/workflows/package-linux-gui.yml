@@ -134,7 +134,7 @@ jobs:
       with:
         name: docker-linux-static.zip
     - run: |
-          la -la
+          ls -la
           sudo apt-get install -y sshpass
           TAG=${{ github.event.inputs.tag }}
 
