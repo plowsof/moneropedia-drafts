@@ -25,6 +25,7 @@ jobs:
         repo: monero-project/monero-gui
         name: |
           docker-windows-static
+          docker-linux-static
         path: frombuild
     - run: |
         dir
