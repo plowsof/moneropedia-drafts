@@ -66,8 +66,8 @@ jobs:
           
           $license = "$($HEAD)\LICENSE"
           $monerod = "$($HEAD)\monerod.exe"
-          Move-Item -Path $license -Destination dummy\monero-gui-$TAG
-          Move-Item -Path $monerod -Destination dummy\monero-gui-$TAG
+          Move-Item -Path $license -Destination dummy\monero-gui-$($TAG)
+          Move-Item -Path $monerod -Destination dummy\monero-gui-$($TAG)
           
           rm $($HEAD)\README.md
           rm $($HEAD)\ANONYMITY_NETWORKS.md
@@ -83,12 +83,12 @@ jobs:
 
     - name: "Clone installer folder from Monero-GUI repo"
       run:
-          mkdir inno; cd inno; git init
+          mkdir inno; git init inno\
           git remote add -f origin https://github.com/monero-project/monero-gui
           git sparse-checkout init
           git sparse-checkout set "installers\windows"
           git pull origin master
-          mkdir installers\windows\bin; cd ..
+          mkdir installers\windows\bin
           Copy-Item -Path "$($dest)\*" -Destination "inno\installers\windows\bin" -Recurse
           
     - name: "Add version to Monero.iss file"
