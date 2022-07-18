@@ -134,7 +134,8 @@ jobs:
       with:
         name: docker-linux-static.zip
     - run: |
-          sudo apt-get install -y sshpass
+          echo "CHECK ENV"
+          ls -la
           TAG=${{ github.event.inputs.tag }}
 
           wget -q "https://gui.xmr.pm/files/cli/${TAG}/monero-linux-x64-${TAG}.tar.bz2"
@@ -167,7 +168,9 @@ jobs:
 
           chmod -R 644 monero-gui-${TAG}/monero-gui-wallet-guide.pdf 
           chmod -R 644 monero-gui-${TAG}/LICENSE
-
+          
+          ls -la 
+          echo "BEFORE CHMOD"
           for filename in ${HEAD}${TAG}/*; do
             chmod -R 755 ${filename} 
             mv ${filename} monero-gui-${TAG}/extras/. 
@@ -176,11 +179,11 @@ jobs:
           mkdir dummy
           sudo mv monero-gui-${TAG} dummy/
           
-          mkdir uploadme
-          cp monero-gui-win-x64-${{ github.event.inputs.tag }}.zip uploadme/.
-          cp monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe uploadme/.
+          #mkdir uploadme
+          #cp monero-gui-win-x64-${{ github.event.inputs.tag }}.zip uploadme/.
+          #cp monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe uploadme/.
           tar -cvjSf monero-gui-linux-x64-${TAG}.tar.bz2 monero-gui-${TAG}
-          cp monero-gui-linux-x64-${TAG}.tar.bz2 uploadme/.
+          #cp monero-gui-linux-x64-${TAG}.tar.bz2 uploadme/.
           
           ls uploadme/*
           
