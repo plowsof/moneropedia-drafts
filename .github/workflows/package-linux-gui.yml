@@ -117,7 +117,7 @@ jobs:
           #Set-SCPFolder -ComputerName 'SCPSERVERHERE' -Credential $credential -LocalFolder 'C:\MyFolder' -RemoteFolder '/someLinuxFolder'
           #Send-PowerShellServerFile -Server YourServer -AuthMode password -User MyUser -Password MyPassword -RemoteFile C:\temp\test.txt -LocalFile C:\downloads\test.txt
           
-          Compress-Archive -Path dummy -DestinationPath monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
+          Compress-Archive -Path dummy\* -DestinationPath monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
 
     - uses: actions/cache@v3
       with:
