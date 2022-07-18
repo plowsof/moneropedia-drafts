@@ -133,6 +133,7 @@ jobs:
         workflow: package-linux-gui.yml
         skip_unpack: true
         name: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
+        workflow_conclusion: in_progress
     - uses: actions/download-artifact@v3
       with:
         name: monero-gui-install-win-x64-${{ github.event.inputs.tag }}
