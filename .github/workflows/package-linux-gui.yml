@@ -60,8 +60,6 @@ jobs:
           
           Set-Content "start-low-graphics-mode.bat" $lowgfx
           
-          7z x monero-win-x64-$($TAG).zip
-          
           mkdir -p dummy\monero-gui-$($TAG)\extras
           $HEAD = "monero-x86_64-w64-mingw32-$($TAG)"
           cd $HEAD
@@ -126,7 +124,7 @@ jobs:
           path: ./inno/installers/windows/Output/monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe
     - uses: actions/upload-artifact@v3
       with:
-          name: docker-linux-static.zip
+          name: docker-linux-static
           path: docker-linux-static.zip
           
   packageLinux:
@@ -144,7 +142,7 @@ jobs:
         name: monero-gui-install-win-x64-${{ github.event.inputs.tag }}
     - uses: actions/download-artifact@v3
       with:
-        name: docker-linux-static.zip
+        name: docker-linux-static
     - run: |
           echo "CHECK ENV"
           ls -la
