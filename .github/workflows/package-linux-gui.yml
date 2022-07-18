@@ -132,7 +132,7 @@ jobs:
         name: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
     - uses: actions/download-artifact@v3
       with:
-        name: monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe
+        name: monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe.zip
     - uses: actions/download-artifact@v3
       with:
         name: docker-linux-static.zip
@@ -184,13 +184,14 @@ jobs:
           sudo mv monero-gui-${TAG} dummy/
           
           #mkdir uploadme
-          #cp monero-gui-win-x64-${TAG}.zip uploadme/.
-          #cp monero-gui-install-win-x64-${TAG}.exe uploadme/.
-          monero-gui-v0.18.0.0
+          cp monero-gui-win-x64-${TAG}.zip uploadme/.
+          #Extract the zip and upload the exe
+          unzip -a monero-gui-install-win-x64-${TAG}.exe.zip
+          cp monero-gui-install-win-x64-${TAG}.exe uploadme/.
           cd dummy
           tar -cvjSf monero-gui-linux-x64-${TAG}.tar.bz2 monero-gui-${TAG}
+          #cp monero-gui-linux-x64-${TAG}.tar.bz2 ../uploadme/.
           cd ..
-          #cp monero-gui-linux-x64-${TAG}.tar.bz2 uploadme/.
           
           ls uploadme/*
           
