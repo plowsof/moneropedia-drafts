@@ -126,11 +126,15 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/download-artifact@v3
       with:
-        name: | 
-          monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
-          monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe
-          docker-linux-static.zip
+        name: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
+    - uses: actions/download-artifact@v3
+      with:
+        name: monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe
+    - uses: actions/download-artifact@v3
+      with:
+        name: docker-linux-static.zip
     - run: |
+          la -la
           sudo apt-get install -y sshpass
           TAG=${{ github.event.inputs.tag }}
 
