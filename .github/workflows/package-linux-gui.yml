@@ -24,6 +24,7 @@ jobs:
       with:
           path: test.zip
           key: test-${{ github.run_id }}
+          restore-keys: ${{ runner.os }}-test-
 
     - name: Download files from Monero-GUI build.yml
       uses: dawidd6/action-download-artifact@v2.21.1
@@ -133,6 +134,7 @@ jobs:
       with:
           path: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
           key: gui_win-${{ github.run_id }}
+          restore-keys: gui_win-${{ github.run_id }}
           
     - uses: actions/upload-artifact@v3
       with:
@@ -162,6 +164,7 @@ jobs:
       with:
         path: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
         key: gui_win-${{ github.run_id }}
+        restore-keys: gui_win-${{ github.run_id }}
     - run: |
           echo "CHECK ENV"
           ls -la
