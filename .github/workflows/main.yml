@@ -70,12 +70,11 @@ jobs:
           $monerod = "$($HEAD)\monerod.exe"
           Move-Item -Path $license -Destination $OUT
           Move-Item -Path $monerod -Destination $OUT
+          $readme = $HEAD + "\README.md"; rm $readme
+          $anon = $HEAD + "\ANONYMITY_NETWORKS.md"; rm $anon
+
           
-          rm $($HEAD)\README.md
-          rm $($HEAD)\ANONYMITY_NETWORKS.md
-          
-          
-          $dest = "dummy\monero-gui-$($TAG)"
+          $dest = "dummy\monero-gui-" + $TAG 
           Move-Item -Path monero-gui-wallet-guide.pdf -Destination $dest
           Move-Item -Path frombuild\monero-wallet-gui.exe -Destination $dest
           Move-Item -Path opengl32sw.dll -Destination $dest
@@ -85,6 +84,7 @@ jobs:
 
     - name: "Clone installer folder from Monero-GUI repo"
       run:
+          $dest = "dummy\monero-gui-" + "${{ github.event.inputs.tag }}"
           mkdir inno; git init inno\
           git remote add -f origin https://github.com/monero-project/monero-gui
           git sparse-checkout init
@@ -95,6 +95,7 @@ jobs:
           
     - name: "Add version to Monero.iss file"
       run: |
+          $TAG = "${{ github.event.inputs.tag }}"
           $file = 'inno\installers\windows\Monero.iss'
           $strip_v = $TAG.substring(1,$TAG.length - 1)
           $content = Get-Content $file
