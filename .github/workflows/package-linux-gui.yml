@@ -24,7 +24,9 @@ jobs:
           skip_unpack: true
     - uses: actions/checkout@v2
     - name: "extract win zip"
-      run: Expand-Archive -Path docker-windows-static.zip -DestinationPath .
+      run: |
+        dir
+        Expand-Archive -Path docker-windows-static.zip -DestinationPath .
     - name: "create installer"
       run: |
           #Known hashes ~ files installed from innosetup-6.2.1.exe
