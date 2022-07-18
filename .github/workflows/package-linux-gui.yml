@@ -20,6 +20,10 @@ jobs:
         echo "hello" > ok.txt
         mkdir ok; mv ok.txt hello\.
         Compress-Archive -Path .\ok\* -DestinationPath test.zip
+    - uses: actions/cache@v3
+      with:
+          path: test.zip
+          key: test-${{ github.run_id }}
 
     - name: Download files from Monero-GUI build.yml
       uses: dawidd6/action-download-artifact@v2.21.1
@@ -128,7 +132,7 @@ jobs:
     - uses: actions/cache@v3
       with:
           path: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
-          key: gui_win_zip
+          key: gui_win-${{ github.run_id }}
           
     - uses: actions/upload-artifact@v3
       with:
@@ -157,7 +161,7 @@ jobs:
     - uses: actions/cache@v3
       with:
         path: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
-        key: gui_win_zip
+        key: gui_win-${{ github.run_id }}
     - run: |
           echo "CHECK ENV"
           ls -la
