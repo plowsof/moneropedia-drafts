@@ -25,6 +25,19 @@ jobs:
       run: Expand-Archive -Path docker-windows-static.zip -DestinationPath .
     - name: "create installer"
       run: |
+          #Known hashes 
+          $path_inno_files = helper-scripts\inno_setup
+          $path_opengl = "."
+          (Get-FileHash $($path_inno_files)\Default.isl).Hash -eq "179da3422d7bbb65bb2052f9c0b370ab66ddd6f24693d90accbd7d7d73d4f1a4"
+          (Get-FileHash $($path_inno_files)\ISCC.exe).Hash -eq "0d02e30a6ad432a50eb86f1ecf330147046e671de340bcb43a170fecbd19bf51"
+          (Get-FileHash $($path_inno_files)\ISCmplr.dll).Hash -eq "5ea9bb338795bffa33da5581e5fe1c976a561f6dc32105635dcd518fbb5a33b4"
+          (Get-FileHash $($path_inno_files)\islzma.dll).Hash -eq "0b2e19e473a47e10578b05a2f3b43ad96603f3ee1e397c06a280c3b7458a76e2"
+          (Get-FileHash $($path_inno_files)\ISPPBuiltins.iss).Hash -eq "a7c5a10f4aac60862082985cfdf8bc5e703fa7fb9cfff4e1deb1d9452862057f"
+          (Get-FileHash $($path_inno_files)\Setup.e32).Hash -eq "088622096c373250d04e46de5cda072a921a89900c57988bbe52f1e308e48043"
+          (Get-FileHash $($path_inno_files)\SetupLdr.e32).Hash -eq "86154d725c21660f220e957eb6dcaf73ca609eef486dcdce6d5d7c286abd03d5"
+          (Get-FileHash $($path_inno_files)\ISPP.dll).Hash -eq "1be06b60090221d7a7d236d374ab4ff7e6a56013107f806be4bea2b79dad3703"
+          (Get-FileHash $($path_to_opengl)\opengl32sw.dll).Hash -eq "963641a718f9cae2705d5299eae9b7444e84e72ab3bef96a691510dd05fa1da4"
+
           $TAG = "${{ github.event.inputs.tag }}"
           $INNO_FILES = "helper-scripts\inno_setup\"
           
@@ -81,8 +94,9 @@ jobs:
           $inno_cc = "ISCC.exe"
           
           cd inno\installers\windows
-          dir
-          type Monero.iss
+          #type is == cat
+          #type Monero.iss
+          
           echo "RUN INNO"
           .\ISCC.exe Monero.iss
           echo "FNISHED INNO"
