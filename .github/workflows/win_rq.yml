@@ -26,7 +26,7 @@ jobs:
     - name: "create installer"
       run: |
           #Known hashes ~ files installed from innosetup-6.2.1.exe
-          $path_inno_files = helper-scripts\inno_setup
+          $path_inno_files = "helper-scripts\inno_setup"
           $path_opengl = "."
           (Get-FileHash $($path_inno_files)\Default.isl).Hash -eq "179da3422d7bbb65bb2052f9c0b370ab66ddd6f24693d90accbd7d7d73d4f1a4"
           (Get-FileHash $($path_inno_files)\ISCC.exe).Hash -eq "0d02e30a6ad432a50eb86f1ecf330147046e671de340bcb43a170fecbd19bf51"
