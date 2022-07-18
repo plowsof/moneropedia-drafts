@@ -61,13 +61,15 @@ jobs:
           
     - name: "Prepare files for zipping"
       run: |
+          echo $TAG
           mkdir -p dummy\monero-gui-$($TAG)\extras
-          $HEAD = "clifiles\monero-x86_64-w64-mingw32-$($TAG)"
+          $HEAD = "clifiles\monero-x86_64-w64-mingw32-" + $TAG
+          $OUT = "dummy\monero-gui-" + $TAG
           
           $license = "$($HEAD)\LICENSE"
           $monerod = "$($HEAD)\monerod.exe"
-          Move-Item -Path $license -Destination dummy\monero-gui-$($TAG)
-          Move-Item -Path $monerod -Destination dummy\monero-gui-$($TAG)
+          Move-Item -Path $license -Destination $OUT
+          Move-Item -Path $monerod -Destination $OUT
           
           rm $($HEAD)\README.md
           rm $($HEAD)\ANONYMITY_NETWORKS.md
