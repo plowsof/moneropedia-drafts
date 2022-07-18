@@ -11,96 +11,36 @@ on:
         default: "v0.18.0.0"
 
 jobs:
-  packageLinux:
-    runs-on: ubuntu-latest
+  packageWindows:
+    runs-on: windows-2019
     steps:
-      - uses: dawidd6/action-download-artifact@v2.21.1
-        with:
+    - name: Download files from Monero-GUI build.yml
+      uses: dawidd6/action-download-artifact@v2.21.1
+      with:
           workflow: build.yml
           workflow_conclusion: success
           run_id: ${{ github.event.inputs.runid }}
           repo: monero-project/monero-gui
           skip_unpack: true
-      - run: |
-          sudo apt-get install -y sshpass
-          TAG=${{ github.event.inputs.tag }}
-
-          wget -q "https://gui.xmr.pm/files/cli/${TAG}/monero-linux-x64-${TAG}.tar.bz2"
-          wget -q "https://github.com/monero-ecosystem/monero-GUI-guide/releases/download/v1.9/monero-gui-wallet-guide.pdf"
-
-          #extract monero-wallet-gui and 'unused' monerod
-          unzip -a docker-linux-static.zip
-
-          #create appimage
-          cat <<EOF >> monero-wallet-gui.AppImage
-          ./monero-wallet-gui
-          EOF
-
-          chmod -R 755 monero-wallet-gui.AppImage
-          chmod -R 755 monero-wallet-gui
-
-          tar -xvf "monero-linux-x64-${TAG}.tar.bz2"
-
-          mkdir -p monero-gui-${TAG}/extras
-
-          HEAD=monero-x86_64-linux-gnu-
-          mv ${HEAD}${TAG}/LICENSE monero-gui-${TAG}/.
-          mv ${HEAD}${TAG}/monerod monero-gui-${TAG}/.
-          rm ${HEAD}${TAG}/README.md
-          rm ${HEAD}${TAG}/ANONYMITY_NETWORKS.md
-
-          cp monero-gui-wallet-guide.pdf monero-gui-${TAG}/.
-          cp monero-wallet-gui monero-gui-${TAG}/.
-          cp monero-wallet-gui.AppImage monero-gui-${TAG}/.
-
-          chmod -R 644 monero-gui-${TAG}/monero-gui-wallet-guide.pdf 
-          chmod -R 644 monero-gui-${TAG}/LICENSE
-
-          for filename in ${HEAD}${TAG}/*; do
-            chmod -R 755 ${filename} 
-            mv ${filename} monero-gui-${TAG}/extras/. 
-          done
-
-          #print hashes
-          find monero-gui-${TAG} -type f -exec sha256sum {} \;
-          #tar -cvjSf monero-gui-linux-x64-${TAG}.tar.bz2 monero-gui-${TAG}
-          mkdir dummy
-          sudo mv monero-gui-${TAG} dummy/
-      - uses: actions/upload-artifact@v3
-        with:
-          name: monero-gui-linux-x64-${{ github.event.inputs.tag }}.tar.bz2
-          path: ./dummy
-      - uses: actions/upload-artifact@v3
-        with:
-          name: docker-windows-static.zip
-          path: docker-windows-static.zip
-  
-  packageWindows:
-    runs-on: windows-2019
-    needs: packageLinux
-    steps:
     - uses: actions/checkout@v2
-    - uses: actions/download-artifact@v3
-      with:
-          name: docker-windows-static.zip
     - name: "extract win zip"
       run: Expand-Archive -Path docker-windows-static.zip -DestinationPath .
     - name: "create installer"
       run: |
-    - name: "create installer"
-      run: |
           #Known hashes ~ files installed from innosetup-6.2.1.exe
           $path_inno_files = "helper-scripts\inno_setup"
-          $path_opengl = "."
-          (Get-FileHash $($path_inno_files)\Default.isl).Hash -eq "179da3422d7bbb65bb2052f9c0b370ab66ddd6f24693d90accbd7d7d73d4f1a4"
-          (Get-FileHash $($path_inno_files)\ISCC.exe).Hash -eq "0d02e30a6ad432a50eb86f1ecf330147046e671de340bcb43a170fecbd19bf51"
-          (Get-FileHash $($path_inno_files)\ISCmplr.dll).Hash -eq "5ea9bb338795bffa33da5581e5fe1c976a561f6dc32105635dcd518fbb5a33b4"
-          (Get-FileHash $($path_inno_files)\islzma.dll).Hash -eq "0b2e19e473a47e10578b05a2f3b43ad96603f3ee1e397c06a280c3b7458a76e2"
-          (Get-FileHash $($path_inno_files)\ISPPBuiltins.iss).Hash -eq "a7c5a10f4aac60862082985cfdf8bc5e703fa7fb9cfff4e1deb1d9452862057f"
-          (Get-FileHash $($path_inno_files)\Setup.e32).Hash -eq "088622096c373250d04e46de5cda072a921a89900c57988bbe52f1e308e48043"
-          (Get-FileHash $($path_inno_files)\SetupLdr.e32).Hash -eq "86154d725c21660f220e957eb6dcaf73ca609eef486dcdce6d5d7c286abd03d5"
-          (Get-FileHash $($path_inno_files)\ISPP.dll).Hash -eq "1be06b60090221d7a7d236d374ab4ff7e6a56013107f806be4bea2b79dad3703"
-          (Get-FileHash $($path_to_opengl)\opengl32sw.dll).Hash -eq "963641a718f9cae2705d5299eae9b7444e84e72ab3bef96a691510dd05fa1da4"
+          #assume opengl file is in homedir
+          
+          (Get-FileHash $path_inno_files\Default.isl -Algorithm "SHA256") -eq "179da3422d7bbb65bb2052f9c0b370ab66ddd6f24693d90accbd7d7d73d4f1a4"
+          (Get-FileHash $path_inno_files\ISCC.exe -Algorithm "SHA256") -eq "0d02e30a6ad432a50eb86f1ecf330147046e671de340bcb43a170fecbd19bf51"
+          (Get-FileHash $path_inno_files\ISCmplr.dll -Algorithm "SHA256") -eq "5ea9bb338795bffa33da5581e5fe1c976a561f6dc32105635dcd518fbb5a33b4"
+          (Get-FileHash $path_inno_files\islzma.dll -Algorithm "SHA256") -eq "0b2e19e473a47e10578b05a2f3b43ad96603f3ee1e397c06a280c3b7458a76e2"
+          (Get-FileHash $path_inno_files\ISPPBuiltins.iss -Algorithm "SHA256") -eq "a7c5a10f4aac60862082985cfdf8bc5e703fa7fb9cfff4e1deb1d9452862057f"
+          (Get-FileHash $path_inno_files\Setup.e32 -Algorithm "SHA256") -eq "088622096c373250d04e46de5cda072a921a89900c57988bbe52f1e308e48043"
+          (Get-FileHash $path_inno_files\SetupLdr.e32 -Algorithm "SHA256") -eq "86154d725c21660f220e957eb6dcaf73ca609eef486dcdce6d5d7c286abd03d5"
+          (Get-FileHash $path_inno_files\ISPP.dll -Algorithm "SHA256") -eq "1be06b60090221d7a7d236d374ab4ff7e6a56013107f806be4bea2b79dad3703"
+          (Get-FileHash opengl32sw.dll -Algorithm "SHA256") -eq "963641a718f9cae2705d5299eae9b7444e84e72ab3bef96a691510dd05fa1da4"
+
           $TAG = "${{ github.event.inputs.tag }}"
           $INNO_FILES = "helper-scripts\inno_setup\"
           
@@ -172,3 +112,62 @@ jobs:
       with:
           name: monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe
           path: ./inno/installers/windows/Output/mysetup.exe
+          
+  packageLinux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/download-artifact@v3
+      with:
+        name: | 
+          monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
+          monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe
+    - run: |
+          sudo apt-get install -y sshpass
+          TAG=${{ github.event.inputs.tag }}
+
+          wget -q "https://gui.xmr.pm/files/cli/${TAG}/monero-linux-x64-${TAG}.tar.bz2"
+          wget -q "https://github.com/monero-ecosystem/monero-GUI-guide/releases/download/v1.9/monero-gui-wallet-guide.pdf"
+
+          #extract monero-wallet-gui and 'unused' monerod
+          unzip -a docker-linux-static.zip
+
+          #create appimage
+          cat <<EOF >> monero-wallet-gui.AppImage
+          ./monero-wallet-gui
+          EOF
+
+          chmod -R 755 monero-wallet-gui.AppImage
+          chmod -R 755 monero-wallet-gui
+
+          tar -xvf "monero-linux-x64-${TAG}.tar.bz2"
+
+          mkdir -p monero-gui-${TAG}/extras
+
+          HEAD=monero-x86_64-linux-gnu-
+          mv ${HEAD}${TAG}/LICENSE monero-gui-${TAG}/.
+          mv ${HEAD}${TAG}/monerod monero-gui-${TAG}/.
+          rm ${HEAD}${TAG}/README.md
+          rm ${HEAD}${TAG}/ANONYMITY_NETWORKS.md
+
+          cp monero-gui-wallet-guide.pdf monero-gui-${TAG}/.
+          cp monero-wallet-gui monero-gui-${TAG}/.
+          cp monero-wallet-gui.AppImage monero-gui-${TAG}/.
+
+          chmod -R 644 monero-gui-${TAG}/monero-gui-wallet-guide.pdf 
+          chmod -R 644 monero-gui-${TAG}/LICENSE
+
+          for filename in ${HEAD}${TAG}/*; do
+            chmod -R 755 ${filename} 
+            mv ${filename} monero-gui-${TAG}/extras/. 
+          done
+
+          #print hashes
+          find monero-gui-${TAG} -type f -exec sha256sum {} \;
+          #tar -cvjSf monero-gui-linux-x64-${TAG}.tar.bz2 monero-gui-${TAG}
+          mkdir dummy
+          sudo mv monero-gui-${TAG} dummy/
+    - uses: actions/upload-artifact@v3
+      with:
+          name: monero-gui-linux-x64-${{ github.event.inputs.tag }}.tar.bz2
+          path: ./dummy
+          
