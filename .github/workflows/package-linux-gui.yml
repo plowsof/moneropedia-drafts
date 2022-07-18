@@ -15,6 +15,12 @@ jobs:
     runs-on: windows-2019
     steps:
     - uses: actions/checkout@v2
+    - run: |
+      #test
+      echo "hello" > ok.txt
+      mkdir ok; mv ok.txt hello\.
+      Compress-Archive -Path .\ok\* -DestinationPath test.zip
+
     - name: Download files from Monero-GUI build.yml
       uses: dawidd6/action-download-artifact@v2.21.1
       with:
@@ -117,7 +123,7 @@ jobs:
           #Set-SCPFolder -ComputerName 'SCPSERVERHERE' -Credential $credential -LocalFolder 'C:\MyFolder' -RemoteFolder '/someLinuxFolder'
           #Send-PowerShellServerFile -Server YourServer -AuthMode password -User MyUser -Password MyPassword -RemoteFile C:\temp\test.txt -LocalFile C:\downloads\test.txt
           
-          Compress-Archive -Path dummy\* -DestinationPath monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
+          Compress-Archive -Path .\dummy\* -DestinationPath monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
 
     - uses: actions/cache@v3
       with:
