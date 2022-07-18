@@ -1,0 +1,43 @@
+on: 
+  workflow_dispatch:
+    inputs:
+      guifile:
+        description: 'run id'     
+        required: true
+        default: "2680356377"
+      tag:
+        description: 'Tag version'
+        required: true
+        default: "v0.18.0.0"
+
+jobs:
+  packageWindows:
+    runs-on: windows-2019
+    steps:
+    - name: "create installer"
+      run: |
+          mkdir dummy
+          echo "Hello" > dummy\hello.txt
+          Compress-Archive -Path .\dummy\* -DestinationPath hello.zip
+
+    - uses: actions/cache@v3
+      with:
+          path: hello.zip
+          key: gui_win-${{ github.run_id }}
+          restore-keys: gui_win-${{ github.run_id }}
+
+          
+  packageLinux:
+    runs-on: ubuntu-latest
+    needs: packageWindows
+    steps:
+    - uses: actions/cache@v3
+      with:
+        path: hello.zip
+        key: gui_win-${{ github.run_id }}
+        restore-keys: gui_win-${{ github.run_id }}
+    - uses: actions/upload-artifact@v3
+      with:
+          name: hello
+          path: hello.zip
+          
