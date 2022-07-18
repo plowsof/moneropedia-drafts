@@ -16,10 +16,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: |
-      #test
-      echo "hello" > ok.txt
-      mkdir ok; mv ok.txt hello\.
-      Compress-Archive -Path .\ok\* -DestinationPath test.zip
+        #test
+        echo "hello" > ok.txt
+        mkdir ok; mv ok.txt hello\.
+        Compress-Archive -Path .\ok\* -DestinationPath test.zip
 
     - name: Download files from Monero-GUI build.yml
       uses: dawidd6/action-download-artifact@v2.21.1
