@@ -61,7 +61,7 @@ jobs:
           
     - name: "Prepare files for zipping"
       run: |
-          echo $TAG
+          $TAG = "${{ github.event.inputs.tag }}"
           mkdir -p dummy\monero-gui-$($TAG)\extras
           $HEAD = "clifiles\monero-x86_64-w64-mingw32-" + $TAG
           $OUT = "dummy\monero-gui-" + $TAG
