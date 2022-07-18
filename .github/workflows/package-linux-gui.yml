@@ -14,15 +14,16 @@ jobs:
   packageWindows:
     runs-on: windows-2019
     steps:
+    - uses: actions/checkout@v2
     - name: Download files from Monero-GUI build.yml
       uses: dawidd6/action-download-artifact@v2.21.1
       with:
-          workflow: build.yml
-          workflow_conclusion: success
-          run_id: ${{ github.event.inputs.runid }}
-          repo: monero-project/monero-gui
-          skip_unpack: true
-    - uses: actions/checkout@v2
+        workflow: build.yml
+        workflow_conclusion: success
+        run_id: ${{ github.event.inputs.runid }}
+        repo: monero-project/monero-gui
+        skip_unpack: true
+    - run: dir
     - name: "extract win zip"
       run: |
         dir
@@ -114,6 +115,10 @@ jobs:
       with:
           name: monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe
           path: ./inno/installers/windows/Output/mysetup.exe
+    - uses: actions/upload-artifact@v3
+      with:
+          name: docker-linux.zip
+          path: docker-linux.zip
           
   packageLinux:
     runs-on: ubuntu-latest
@@ -123,6 +128,7 @@ jobs:
         name: | 
           monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
           monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe
+          docker-linux-static.zip
     - run: |
           sudo apt-get install -y sshpass
           TAG=${{ github.event.inputs.tag }}
