@@ -34,7 +34,7 @@ jobs:
           $path_inno_files = "helper-scripts\inno_setup"
           #assume opengl file is in homedir
           #wrong hash test
-          if ((Get-FileHash $path_inno_files\Default.isl).hash -eq "ZZZZ179da3422d7bbb65bb2052f9c0b370ab66ddd6f24693d90accbd7d7d73d4f1a4") -eq $false){ Exit 1 }
+          if (-Not ((Get-FileHash $path_inno_files\Default.isl).hash -eq "ZZZZ179da3422d7bbb65bb2052f9c0b370ab66ddd6f24693d90accbd7d7d73d4f1a4")){ Exit 1 }
           (Get-FileHash $path_inno_files\ISCC.exe).hash -eq "0d02e30a6ad432a50eb86f1ecf330147046e671de340bcb43a170fecbd19bf51"
           (Get-FileHash $path_inno_files\ISCmplr.dll).hash -eq "5ea9bb338795bffa33da5581e5fe1c976a561f6dc32105635dcd518fbb5a33b4"
           (Get-FileHash $path_inno_files\islzma.dll).hash -eq "0b2e19e473a47e10578b05a2f3b43ad96603f3ee1e397c06a280c3b7458a76e2"
