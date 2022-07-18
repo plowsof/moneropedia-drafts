@@ -131,10 +131,10 @@ jobs:
       with:
         workflow: package-linux-gui.yml
         skip_unpack: true
-        name: monero-gui-win-x64-${{ github.event.inputs.tag }}
+        name: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
     - uses: actions/download-artifact@v3
       with:
-        name: monero-gui-install-win-x64-${{ github.event.inputs.tag }}
+        name: monero-gui-install-win-x64-${{ github.event.inputs.tag }}.zip
     - uses: actions/download-artifact@v3
       with:
         name: docker-linux-static.zip
