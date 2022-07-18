@@ -64,8 +64,8 @@ jobs:
           mkdir -p dummy\monero-gui-$($TAG)\extras
           $HEAD = "clifiles\monero-x86_64-w64-mingw32-$($TAG)"
           
-          $license = $($HEAD)\LICENSE
-          $monerod = $($HEAD)\monerod.exe
+          $license = "$($HEAD)\LICENSE"
+          $monerod = "$($HEAD)\monerod.exe"
           Move-Item -Path $license -Destination dummy\monero-gui-$TAG
           Move-Item -Path $monerod -Destination dummy\monero-gui-$TAG
           
