@@ -87,29 +87,88 @@ jobs:
       run: Expand-Archive -Path docker-windows-static.zip -DestinationPath .
     - name: "create installer"
       run: |
+    - name: "create installer"
+      run: |
+          #Known hashes ~ files installed from innosetup-6.2.1.exe
+          $path_inno_files = helper-scripts\inno_setup
+          $path_opengl = "."
+          (Get-FileHash $($path_inno_files)\Default.isl).Hash -eq "179da3422d7bbb65bb2052f9c0b370ab66ddd6f24693d90accbd7d7d73d4f1a4"
+          (Get-FileHash $($path_inno_files)\ISCC.exe).Hash -eq "0d02e30a6ad432a50eb86f1ecf330147046e671de340bcb43a170fecbd19bf51"
+          (Get-FileHash $($path_inno_files)\ISCmplr.dll).Hash -eq "5ea9bb338795bffa33da5581e5fe1c976a561f6dc32105635dcd518fbb5a33b4"
+          (Get-FileHash $($path_inno_files)\islzma.dll).Hash -eq "0b2e19e473a47e10578b05a2f3b43ad96603f3ee1e397c06a280c3b7458a76e2"
+          (Get-FileHash $($path_inno_files)\ISPPBuiltins.iss).Hash -eq "a7c5a10f4aac60862082985cfdf8bc5e703fa7fb9cfff4e1deb1d9452862057f"
+          (Get-FileHash $($path_inno_files)\Setup.e32).Hash -eq "088622096c373250d04e46de5cda072a921a89900c57988bbe52f1e308e48043"
+          (Get-FileHash $($path_inno_files)\SetupLdr.e32).Hash -eq "86154d725c21660f220e957eb6dcaf73ca609eef486dcdce6d5d7c286abd03d5"
+          (Get-FileHash $($path_inno_files)\ISPP.dll).Hash -eq "1be06b60090221d7a7d236d374ab4ff7e6a56013107f806be4bea2b79dad3703"
+          (Get-FileHash $($path_to_opengl)\opengl32sw.dll).Hash -eq "963641a718f9cae2705d5299eae9b7444e84e72ab3bef96a691510dd05fa1da4"
           $TAG = "${{ github.event.inputs.tag }}"
+          $INNO_FILES = "helper-scripts\inno_setup\"
+          
           Invoke-WebRequest -Uri "https://gui.xmr.pm/files/cli/$($TAG)/monero-win-x64-$($TAG).zip" -OutFile "monero-win-x64-$($TAG).zip"
           Invoke-WebRequest -Uri "https://github.com/monero-ecosystem/monero-GUI-guide/releases/download/v1.9/monero-gui-wallet-guide.pdf" -OutFile "monero-gui-wallet-guide.pdf"
           New-Item "start-low-graphics-mode.bat"
-          Set-Content "start-low-graphics-mode.bat" '@echo off`r`n`r`nset QMLSCENE_DEVICE=softwarecontext`r`n`r`nstart /b monero-wallet-gui.exe'
+          $lowgfx = @"
+          @echo off
+          
+          set QMLSCENE_DEVICE=softwarecontext
+          
+          start /b monero-wallet-gui.exe
+          "@
+          
+          Set-Content "start-low-graphics-mode.bat" $lowgfx
+          
           7z x monero-win-x64-$($TAG).zip
+          
           mkdir -p dummy\monero-gui-$($TAG)\extras
           $HEAD = "monero-x86_64-w64-mingw32-$($TAG)"
           cd $HEAD
-          dir
           Move-Item -Path LICENSE -Destination ..\dummy\monero-gui-$($TAG)
           Move-Item -Path monerod.exe -Destination ..\dummy\monero-gui-$($TAG)
+          
           rm README.md
           rm ANONYMITY_NETWORKS.md
+          
           cd ..
+          
           $dest = "dummy\monero-gui-$($TAG)"
           Move-Item -Path monero-gui-wallet-guide.pdf -Destination $dest
           Move-Item -Path monero-wallet-gui.exe -Destination $dest
           Move-Item -Path opengl32sw.dll -Destination $dest
           Move-Item -path start-low-graphics-mode.bat -Destination $dest
+          
           Get-ChildItem -Path "$($HEAD)\*" -Recurse | Move-Item -Destination "dummy\monero-gui-$($TAG)\extras"
-          #Compress-Archive -Path dummy\monero-gui-$($TAG) -DestinationPath monero-gui-win-x64-$($TAG).zip
+          
+          mkdir inno; cd inno; git init
+          git remote add -f origin https://github.com/monero-project/monero-gui
+          git sparse-checkout init
+          git sparse-checkout set "installers\windows"
+          git pull origin master
+          mkdir installers\windows\bin; cd ..
+          Copy-Item -Path "$($dest)\*" -Destination "inno\installers\windows\bin" -Recurse
+          
+          $file = 'inno\installers\windows\Monero.iss'
+          $strip_v = $TAG.substring(1,$TAG.length - 1)
+          $content = Get-Content $file
+          $new_str = '#define GuiVersion "' + $strip_v + '"'
+          $content[3] = $new_str
+          $content | Set-Content $file
+          
+          Copy-Item -Path "helper-scripts\inno_setup\*" -Destination "inno\installers\windows" -Recurse
+          $inno_cc = "ISCC.exe"
+          
+          cd inno\installers\windows
+          #type is == cat
+          #type Monero.iss
+          
+          echo "RUN INNO"
+          .\ISCC.exe Monero.iss
+          echo "FNISHED INNO"
+        
     - uses: actions/upload-artifact@v3
       with:
           name: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
           path: ./dummy
+    - uses: actions/upload-artifact@v3
+      with:
+          name: monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe
+          path: ./inno/installers/windows/Output/mysetup.exe
