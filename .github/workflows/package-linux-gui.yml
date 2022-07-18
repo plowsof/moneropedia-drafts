@@ -163,9 +163,18 @@ jobs:
 
           #print hashes
           find monero-gui-${TAG} -type f -exec sha256sum {} \;
-          #tar -cvjSf monero-gui-linux-x64-${TAG}.tar.bz2 monero-gui-${TAG}
           mkdir dummy
           sudo mv monero-gui-${TAG} dummy/
+          
+          mkdir uploadme
+          cp monero-gui-win-x64-${{ github.event.inputs.tag }}.zip uploadme\.
+          cp monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe uploadme\.
+          tar -cvjSf monero-gui-linux-x64-${TAG}.tar.bz2 monero-gui-${TAG}
+          cp monero-gui-linux-x64-${TAG}.tar.bz2 uploadme\.
+          
+          dir uploadme\
+          
+          #$ scp -r uploadme user@host.com:/var/www/html/target_dir
     - uses: actions/upload-artifact@v3
       with:
           name: monero-gui-linux-x64-${{ github.event.inputs.tag }}.tar.bz2
