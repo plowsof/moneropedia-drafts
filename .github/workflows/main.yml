@@ -83,8 +83,8 @@ jobs:
           Get-ChildItem -Path "$($HEAD)\*" -Recurse | Move-Item -Destination "dummy\monero-gui-$($TAG)\extras"
 
     - name: "Clone installer folder from Monero-GUI repo"
-      run:
-          $dest = "dummy\monero-gui-" + ${{ github.event.inputs.tag }}
+      run: |
+          $dest = "dummy\monero-gui-" + "${{ github.event.inputs.tag }}"
           mkdir inno; cd inno
           git init
           git remote add -f origin https://github.com/monero-project/monero-gui
