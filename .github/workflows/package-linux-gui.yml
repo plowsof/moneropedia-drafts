@@ -131,7 +131,7 @@ jobs:
       with:
         workflow: package-linux-gui.yml
         skip_unpack: false
-        name: monero-gui-win-x64-${{ github.event.inputs.tag }}.zip
+        name: monero-gui-win-x64-${{ github.event.inputs.tag }}
     - uses: actions/download-artifact@v3
       with:
         name: monero-gui-install-win-x64-${{ github.event.inputs.tag }}.zip
