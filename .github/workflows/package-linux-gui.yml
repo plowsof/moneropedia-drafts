@@ -105,6 +105,9 @@ jobs:
           echo "RUN INNO"
           .\ISCC.exe Monero.iss
           echo "FNISHED INNO"
+          
+          #rename exe
+          mv ./inno/installers/windows/Output/mysetup.exe ./inno/installers/windows/Output/monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe
         
     - uses: actions/upload-artifact@v3
       with:
@@ -112,7 +115,7 @@ jobs:
           path: ./dummy
     - uses: actions/upload-artifact@v3
       with:
-          name: monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe
+          name: monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe.zip
           path: ./inno/installers/windows/Output/mysetup.exe
     - uses: actions/upload-artifact@v3
       with:
@@ -151,7 +154,8 @@ jobs:
 
           chmod -R 755 monero-wallet-gui.AppImage
           chmod -R 755 monero-wallet-gui
-
+          
+          #extract cli files
           tar -xvf "monero-linux-x64-${TAG}.tar.bz2"
 
           mkdir -p monero-gui-${TAG}/extras
@@ -180,9 +184,12 @@ jobs:
           sudo mv monero-gui-${TAG} dummy/
           
           #mkdir uploadme
-          #cp monero-gui-win-x64-${{ github.event.inputs.tag }}.zip uploadme/.
-          #cp monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe uploadme/.
+          #cp monero-gui-win-x64-${TAG}.zip uploadme/.
+          #cp monero-gui-install-win-x64-${TAG}.exe uploadme/.
+          monero-gui-v0.18.0.0
+          cd dummy
           tar -cvjSf monero-gui-linux-x64-${TAG}.tar.bz2 monero-gui-${TAG}
+          cd ..
           #cp monero-gui-linux-x64-${TAG}.tar.bz2 uploadme/.
           
           ls uploadme/*
