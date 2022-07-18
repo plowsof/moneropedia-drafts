@@ -84,7 +84,7 @@ jobs:
 
     - name: "Clone installer folder from Monero-GUI repo"
       run:
-          $dest = "dummy\monero-gui-" + "${{ github.event.inputs.tag }}"
+          $dest = "dummy\monero-gui-" + "${{ github.event.inputs.tag }}";
           mkdir inno; git init inno\
           git remote add -f origin https://github.com/monero-project/monero-gui
           git sparse-checkout init
