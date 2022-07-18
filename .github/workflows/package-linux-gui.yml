@@ -60,6 +60,8 @@ jobs:
           
           Set-Content "start-low-graphics-mode.bat" $lowgfx
           
+          Expand-Archive -Path monero-win-x64-$($TAG).zip -DestinationPath .
+          
           mkdir -p dummy\monero-gui-$($TAG)\extras
           $HEAD = "monero-x86_64-w64-mingw32-$($TAG)"
           cd $HEAD
