@@ -109,7 +109,13 @@ jobs:
           
           #rename exe
           Move-Item -Path Output\mysetup.exe -Destination Output\monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe
-        
+          
+          #scp ideas
+          #$credential = "some-credential"
+          #Get-SCPFile -ComputerName 'SCPSERVERHERE' -Credential $credential -RemoteFile "/someLinuxFolder/file" -LocalFile 'C:\MyFolder\file'
+          #Set-SCPFile -ComputerName 'SCPSERVERHERE' -Credential $credential -RemotePath '/someLinuxFolder/file' -LocalFile 'C:\MyFolder\file'
+          #Set-SCPFolder -ComputerName 'SCPSERVERHERE' -Credential $credential -LocalFolder 'C:\MyFolder' -RemoteFolder '/someLinuxFolder'
+          #Send-PowerShellServerFile -Server YourServer -AuthMode password -User MyUser -Password MyPassword -RemoteFile C:\temp\test.txt -LocalFile C:\downloads\test.txt
     - uses: actions/upload-artifact@v3
       with:
           name: monero-gui-win-x64-${{ github.event.inputs.tag }}
