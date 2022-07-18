@@ -107,7 +107,7 @@ jobs:
           echo "FNISHED INNO"
           
           #rename exe
-          mv ./inno/installers/windows/Output/mysetup.exe ./inno/installers/windows/Output/monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe
+          Move-Item -Path Output\mysetup.exe -Destination Output\monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe
         
     - uses: actions/upload-artifact@v3
       with:
@@ -116,7 +116,7 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
           name: monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe.zip
-          path: ./inno/installers/windows/Output/mysetup.exe
+          path: ./inno/installers/windows/Output/monero-gui-install-win-x64-${{ github.event.inputs.tag }}.exe
     - uses: actions/upload-artifact@v3
       with:
           name: docker-linux-static.zip
