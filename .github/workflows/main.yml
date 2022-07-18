@@ -1,0 +1,32 @@
+on: 
+  workflow_dispatch:
+    inputs:
+      guifile:
+        description: 'run id'     
+        required: true
+        default: "2680356377"
+      tag:
+        description: 'Tag version'
+        required: true
+        default: "v0.18.0.0"
+
+jobs:
+  packageWindows:
+    runs-on: windows-2019
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Download files from Monero-GUI build.yml
+      uses: dawidd6/action-download-artifact@v2.21.1
+      with:
+        workflow: build.yml
+        workflow_conclusion: success
+        run_id: ${{ github.event.inputs.runid }}
+        repo: monero-project/monero-gui
+        name: |
+          #docker-linux-static
+          docker-windows-static
+        path: frombuild
+    - run: |
+        dir
+        cd frombuild; dir
