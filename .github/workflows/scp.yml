@@ -19,6 +19,13 @@ jobs:
         echo "Hello world" > hello.txt
         Install-Module -Name Posh-SSH
         New-Item auth.txt
-        Set-Content auth.txt ${{ secrets.SSH_KEY }}
+        
+        Set-Content auth.txt "${{ secrets.SSH_KEY }}"
+        ssh-add auth.txt
 
-        Set-SCPItem -ComputerName '${{ secrets.SCP_SERVER }}' -KeyFile auth.txt -AcceptKey -Path hello.txt -Destination /tmp -Verbose
+        $computer = "${{ secrets.SCP_SERVER }}"
+        $username = "${{ secrets.USER }}"
+        $password = "hunter2" | ConvertTo-SecureString -AsPlainText -Force
+        $credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $username, $password
+        $keyfile  = auth.txt
+        Set-SCPItem -ComputerName $computer -KeyFile $keyfile -AcceptKey -Credential $credential -Path hello.txt -Destination /tmp -Verbose
