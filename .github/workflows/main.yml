@@ -124,11 +124,11 @@ jobs:
     
     - name: "Upload files using SCP"
       run: |
+        Install-Module -Name Posh-SSH -force
         $keystring = "${{ secrets.OLD_SSH }}"
         $computer = "${{ secrets.SCP_SERVER }}"
         $username = "${{ secrets.USER }}"
         $password = "hunter2" | ConvertTo-SecureString -AsPlainText -Force
         $credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $username, $password
-        $keyfile  = "auth.txt"
         Set-SCPItem -ComputerName $computer -KeyString $keystring -AcceptKey -Credential $credential -Path  .\uploadme -Destination /tmp -Verbose
 
