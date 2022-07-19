@@ -139,5 +139,5 @@ jobs:
         New-SFTPItem -SessionId 0 -Path /tmp/${{github.event.inputs.tag}}/gui/packaged -ItemType Directory
         
         #push file
-        Set-SCPItem -ComputerName $computer -KeyString $keystring -AcceptKey -Credential $credential -Path  .\uploadme -Destination $custom_dir -Verbose
+        Set-SCPItem -ComputerName $computer -KeyString $keystring -AcceptKey -Credential $credential -Path  .\uploadme -Destination /tmp -Verbose
 
