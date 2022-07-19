@@ -163,7 +163,6 @@ jobs:
           wget -q "https://gui.xmr.pm/files/cli/${TAG}/monero-linux-x64-${TAG}.tar.bz2"
           wget -q "https://github.com/monero-ecosystem/monero-GUI-guide/releases/download/v1.9/monero-gui-wallet-guide.pdf"
     - name: "Create appimage file"
-      run: |
           #create appimage
           cat <<EOF >> monero-wallet-gui.AppImage
           ./monero-wallet-gui
@@ -175,15 +174,17 @@ jobs:
           #extract cli files
     - name: "Extract CLI files"
       run: |
+          TAG=${{ github.event.inputs.tag }}
           tar -xvf "monero-linux-x64-${TAG}.tar.bz2"
 
     - name: "Prepare / move files for packaging"
       run: |
+          TAG=${{ github.event.inputs.tag }}
           mkdir -p monero-gui-${TAG}/extras
           HEAD=monero-x86_64-linux-gnu-
           mv ${HEAD}${TAG}/LICENSE monero-gui-${TAG}/.
           mv ${HEAD}${TAG}/monerod monero-gui-${TAG}/.
-          
+
           rm ${HEAD}${TAG}/README.md
           rm ${HEAD}${TAG}/ANONYMITY_NETWORKS.md
 
