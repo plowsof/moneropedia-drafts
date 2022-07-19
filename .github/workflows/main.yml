@@ -124,6 +124,7 @@ jobs:
     
     - name: "Upload files using SCP"
       run: |
+        $custom_dir = "/tmp/" + "${{ github.event.inputs.tag }}" + "/gui/packaged/"
         Install-Module -Name Posh-SSH -force
         $keystring = "${{ secrets.OLD_SSH }}"
         $computer = "${{ secrets.SCP_SERVER }}"
@@ -132,9 +133,9 @@ jobs:
         $credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $username, $password
 
         #create remote dir 
-        New-SFTPSession -ComputerName $computer -Credential $credential -Verbose
-        New-SFTPItem -SessionId 0 -Path /tmp/testing -ItemType Directory
+        New-SFTPSession -ComputerName $computer -Credential $credential -KeyString $keystring -AcceptKey -Verbose
+        New-SFTPItem -SessionId 0 -Path $custom_dir -ItemType Directory
         
         #push file
-        Set-SCPItem -ComputerName $computer -KeyString $keystring -AcceptKey -Credential $credential -Path  .\uploadme -Destination /tmp/testing -Verbose
+        Set-SCPItem -ComputerName $computer -KeyString $keystring -AcceptKey -Credential $credential -Path  .\uploadme -Destination $custom_dir -Verbose
 
