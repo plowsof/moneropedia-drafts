@@ -136,7 +136,7 @@ jobs:
 
         #create remote dir
         #this errors if already exists
-        #but there is a way to test this beforehand 
+        #but there is a way to test this beforehand -> Test-SFTPPath
         #New-SFTPSession -ComputerName $computer -Credential $credential -KeyString $keystring -AcceptKey -Verbose
         #New-SFTPItem -SessionId 0 -Path /tmp/${{github.event.inputs.tag}} -ItemType Directory
         #New-SFTPItem -SessionId 0 -Path /tmp/${{github.event.inputs.tag}}/gui -ItemType Directory
@@ -217,6 +217,7 @@ jobs:
           
           echo "${{ secrets.OLD_SSH }}" | tee ssh_key
           sudo chmod 600 ssh_key
+          #if scp remote-host:~/myfile ./ >&/dev/null ; then echo "transfer OK" ; else echo "transfer failed" ; fi
     - name: "Upload monero-gui-linux-x64-${{ github.event.inputs.tag }}.tar.bz2"
       run: scp -r -i ./ssh_key -o StrictHostKeyChecking=no "./uploadme" ${{ secrets.USER }}@${{ secrets.SCP_SERVER }}:/tmp
 
