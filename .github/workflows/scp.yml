@@ -17,7 +17,7 @@ jobs:
     - name: "Upload files using SCP"
       run: |
         echo "Hello world" > hello.txt
-        Install-Module -Name Posh-SSH
+        Install-Module -Name Posh-SSH -force
         New-Item auth.txt
         
         Set-Content auth.txt "${{ secrets.SSH_KEY }}"
