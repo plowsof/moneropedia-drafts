@@ -18,4 +18,7 @@ jobs:
       run: |
         echo "Hello world" > hello.txt
         Install-Module -Name Posh-SSH
-        Set-SCPItem -ComputerName ${{ secrets.SCP_SERVER }} -KeyString ${{ secrets.SSH_KEY }} -AcceptKey -Credential ${{ secrets.USER }} -Path hello.txt -Destination /tmp -Verbose
+        New-Item auth.txt
+        Set-Content auth.txt ${{ secrets.SSH_KEY }}
+
+        Set-SCPItem -ComputerName '${{ secrets.SCP_SERVER }}' -KeyFile auth.txt -AcceptKey -Path hello.txt -Destination /tmp -Verbose
