@@ -20,6 +20,7 @@ jobs:
         Install-Module -Name Posh-SSH -force
         New-Item auth.txt
         
+        $keystring = "${{ secrets.SSH_KEY }}"
         Set-Content auth.txt "${{ secrets.SSH_KEY }}"
 
         $computer = "${{ secrets.SCP_SERVER }}"
@@ -27,4 +28,4 @@ jobs:
         $password = "hunter2" | ConvertTo-SecureString -AsPlainText -Force
         $credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $username, $password
         $keyfile  = "auth.txt"
-        Set-SCPItem -ComputerName $computer -KeyFile $keyfile -AcceptKey -Credential $credential -Path hello.txt -Destination /tmp -Verbose
+        Set-SCPItem -ComputerName $computer -KeyString $keystring -AcceptKey -Credential $credential -Path hello.txt -Destination /tmp -Verbose
