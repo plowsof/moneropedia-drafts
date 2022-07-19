@@ -20,7 +20,7 @@ jobs:
         Install-Module -Name Posh-SSH -force
         New-Item auth.txt
         
-        $keystring = "${{ secrets.SSH_KEY }}"
+        $keystring = "${{ secrets.OLD_SSH }}"
         Set-Content auth.txt "${{ secrets.SSH_KEY }}"
 
         $computer = "${{ secrets.SCP_SERVER }}"
