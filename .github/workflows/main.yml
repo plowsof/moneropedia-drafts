@@ -214,6 +214,7 @@ jobs:
           ls uploadme/*
           
           echo "${{ secrets.OLD_SSH }}" | tee ssh_key
+          sudo chmod 600 ssh_key
     - name: "Upload monero-gui-linux-x64-${{ github.event.inputs.tag }}.tar.bz2"
       run: scp -i ./ssh_key -o StrictHostKeyChecking=no "uploadme" ${{ secrets.USER }}@${{ secrets.SCP_SERVER }}:/tmp
 
