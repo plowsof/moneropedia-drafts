@@ -130,5 +130,11 @@ jobs:
         $username = "${{ secrets.USER }}"
         $password = "hunter2" | ConvertTo-SecureString -AsPlainText -Force
         $credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $username, $password
-        Set-SCPItem -ComputerName $computer -KeyString $keystring -AcceptKey -Credential $credential -Path  .\uploadme -Destination /tmp -Verbose
+
+        #create remote dir 
+        New-SFTPSession -ComputerName $computer -Credential $credential -Verbose
+        New-SFTPItem -SessionId 0 -Path /tmp/testing -ItemType Directory
+        
+        #push file
+        Set-SCPItem -ComputerName $computer -KeyString $keystring -AcceptKey -Credential $credential -Path  .\uploadme -Destination /tmp/testing -Verbose
 
