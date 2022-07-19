@@ -26,7 +26,7 @@ jobs:
         $credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $username, $password
 
         #create remote dir 
-        New-SFTPSession -ComputerName $computer -Credential $credential -Verbose
+        New-SFTPSession -ComputerName $computer -Credential $credential -KeyString $keystring -AcceptKey -Verbose
         New-SFTPItem -SessionId 0 -Path /tmp/testing -ItemType Directory
         
         #push file
