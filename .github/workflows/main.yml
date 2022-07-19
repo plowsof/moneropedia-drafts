@@ -163,15 +163,15 @@ jobs:
           wget -q "https://gui.xmr.pm/files/cli/${TAG}/monero-linux-x64-${TAG}.tar.bz2"
           wget -q "https://github.com/monero-ecosystem/monero-GUI-guide/releases/download/v1.9/monero-gui-wallet-guide.pdf"
     - name: "Create appimage file"
+      run: |
           #create appimage
           cat <<EOF >> monero-wallet-gui.AppImage
           ./monero-wallet-gui
           EOF
-
+          
           chmod -R 755 monero-wallet-gui.AppImage
           chmod -R 755 monero-wallet-gui
           
-          #extract cli files
     - name: "Extract CLI files"
       run: |
           TAG=${{ github.event.inputs.tag }}
