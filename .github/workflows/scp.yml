@@ -27,7 +27,7 @@ jobs:
 
         #create remote dir 
         New-SFTPSession -ComputerName $computer -Credential $credential -KeyString $keystring -AcceptKey -Verbose
-        New-SFTPItem -SessionId 0 -Path /tmp/testing -ItemType Directory
+        New-SFTPItem -SessionId 0 -Path /tmp/testing/hello/lol -ItemType Directory
         
         #push file
         #Set-SCPItem -ComputerName $computer -KeyString $keystring -AcceptKey -Credential $credential -Path  .\uploadme -Destination /tmp/testing -Verbose
