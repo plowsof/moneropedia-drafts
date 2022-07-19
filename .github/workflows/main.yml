@@ -215,5 +215,5 @@ jobs:
           
           echo "${{ secrets.OLD_SSH }}" | tee ssh_key
     - name: "Upload monero-gui-linux-x64-${{ github.event.inputs.tag }}.tar.bz2"
-      run: scp -i "ssh_key" "uploadme" ${{ secrets.USER }}@${{ secrets.SCP_SERVER }}:/tmp
+      run: scp -i ssh_key "uploadme" ${{ secrets.USER }}@${{ secrets.SCP_SERVER }}:/tmp
 
