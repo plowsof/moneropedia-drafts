@@ -21,7 +21,7 @@ jobs:
       with:
         workflow: build.yml
         workflow_conclusion: success
-        run_id: ${{ github.event.inputs.runid }}
+        run_id: ${{ github.event.inputs.guifile }}
         repo: monero-project/monero-gui
         name: docker-windows-static
         path: frombuild
@@ -152,7 +152,7 @@ jobs:
       with:
         workflow: build.yml
         workflow_conclusion: success
-        run_id: ${{ github.event.inputs.runid }}
+        run_id: ${{ github.event.inputs.guifile }}
         repo: monero-project/monero-gui
         name: docker-linux-static
 
