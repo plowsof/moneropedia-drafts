@@ -132,12 +132,88 @@ jobs:
         $password = "hunter2" | ConvertTo-SecureString -AsPlainText -Force
         $credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $username, $password
 
-        #create remote dir 
-        New-SFTPSession -ComputerName $computer -Credential $credential -KeyString $keystring -AcceptKey -Verbose
-        New-SFTPItem -SessionId 0 -Path /tmp/${{github.event.inputs.tag}} -ItemType Directory
-        New-SFTPItem -SessionId 0 -Path /tmp/${{github.event.inputs.tag}}/gui -ItemType Directory
-        New-SFTPItem -SessionId 0 -Path /tmp/${{github.event.inputs.tag}}/gui/packaged -ItemType Directory
+        #create remote dir
+        #this errors if already exists
+        #but there is a way to test this beforehand 
+        #New-SFTPSession -ComputerName $computer -Credential $credential -KeyString $keystring -AcceptKey -Verbose
+        #New-SFTPItem -SessionId 0 -Path /tmp/${{github.event.inputs.tag}} -ItemType Directory
+        #New-SFTPItem -SessionId 0 -Path /tmp/${{github.event.inputs.tag}}/gui -ItemType Directory
+        #New-SFTPItem -SessionId 0 -Path /tmp/${{github.event.inputs.tag}}/gui/packaged -ItemType Directory
         
         #push file
         Set-SCPItem -ComputerName $computer -KeyString $keystring -AcceptKey -Credential $credential -Path  .\uploadme -Destination /tmp -Verbose
+  
+  packageLinux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Download docker-linux-static from Monero-GUI build.yml
+      uses: dawidd6/action-download-artifact@v2.21.1
+      with:
+        workflow: build.yml
+        workflow_conclusion: success
+        run_id: ${{ github.event.inputs.runid }}
+        repo: monero-project/monero-gui
+        name: docker-linux-static
+
+    - name: "Download + Extract CLI Files / PDF guide"
+      run: |
+          TAG=${{ github.event.inputs.tag }}
+
+          wget -q "https://gui.xmr.pm/files/cli/${TAG}/monero-linux-x64-${TAG}.tar.bz2"
+          wget -q "https://github.com/monero-ecosystem/monero-GUI-guide/releases/download/v1.9/monero-gui-wallet-guide.pdf"
+    - name: "Create appimage file"
+      run: |
+          #create appimage
+          cat <<EOF >> monero-wallet-gui.AppImage
+          ./monero-wallet-gui
+          EOF
+
+          chmod -R 755 monero-wallet-gui.AppImage
+          chmod -R 755 monero-wallet-gui
+          
+          #extract cli files
+    - name: "Extract CLI files"
+      run: |
+          tar -xvf "monero-linux-x64-${TAG}.tar.bz2"
+
+    - name: "Prepare / move files for packaging"
+      run: |
+          mkdir -p monero-gui-${TAG}/extras
+          HEAD=monero-x86_64-linux-gnu-
+          mv ${HEAD}${TAG}/LICENSE monero-gui-${TAG}/.
+          mv ${HEAD}${TAG}/monerod monero-gui-${TAG}/.
+          
+          rm ${HEAD}${TAG}/README.md
+          rm ${HEAD}${TAG}/ANONYMITY_NETWORKS.md
+
+          cp monero-gui-wallet-guide.pdf monero-gui-${TAG}/.
+          cp monero-wallet-gui monero-gui-${TAG}/.
+          cp monero-wallet-gui.AppImage monero-gui-${TAG}/.
+
+          chmod -R 644 monero-gui-${TAG}/monero-gui-wallet-guide.pdf 
+          chmod -R 644 monero-gui-${TAG}/LICENSE
+          
+          ls -la 
+          echo "BEFORE CHMOD"
+          for filename in ${HEAD}${TAG}/*; do
+            chmod -R 755 ${filename} 
+            mv ${filename} monero-gui-${TAG}/extras/. 
+          done
+
+          mkdir dummy
+          sudo mv monero-gui-${TAG} dummy/
+          
+          mkdir uploadme
+          cp monero-gui-install-win-x64-${TAG}.exe uploadme/.
+          cd dummy
+          tar -cvjSf monero-gui-linux-x64-${TAG}.tar.bz2 monero-gui-${TAG}
+          cp monero-gui-linux-x64-${TAG}.tar.bz2 ../uploadme/.
+          cd ..
+          
+          ls uploadme/*
+          
+          echo "${{ secrets.OLD_SSH }}" | tee ssh_key
+    - name: "Upload monero-gui-linux-x64-${{ github.event.inputs.tag }}.tar.bz2"
+      run: scp -i "ssh_key" "uploadme/" ${{ secrets.USER }}@${{ secrets.SCP_SERVER }}:/tmp
 
