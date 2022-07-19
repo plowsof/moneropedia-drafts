@@ -54,7 +54,9 @@ jobs:
           New-Item "start-low-graphics-mode.bat"
           $lowgfx = @"
           @echo off
+          
           set QMLSCENE_DEVICE=softwarecontext
+          
           start /b monero-wallet-gui.exe
           "@
           Set-Content "start-low-graphics-mode.bat" $lowgfx
