@@ -1,0 +1,12 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@main
+    - uses: tor-actions/setup-tor@main
+    - run: |
+        tor
+        curl -IL --socks5-hostname 127.0.0.1:9050 http://dvirnr6squ4k5inagl6cmo4oikclm4fotmsicquefqutpyzzbumet3yd.onion:18081
