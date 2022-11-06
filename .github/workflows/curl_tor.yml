@@ -8,3 +8,4 @@ jobs:
     - run: |
         sudo apt-get install -y tor
         curl -IL --socks5-hostname 127.0.0.1:9050 http://dvirnr6squ4k5inagl6cmo4oikclm4fotmsicquefqutpyzzbumet3yd.onion:18081
+        curl -IL --socks5-hostname 127.0.0.1:9050 http://rjk5vwl4wxqozunx6rpaat7rwxkbtlcknkhyq5tuzmy7rc22rbxl4wyd.onion/monero_archive/
