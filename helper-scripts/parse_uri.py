@@ -203,7 +203,6 @@
   'amount': 39,
   'recipient_name': '8dade348e1d6409199edb8df64c8f295'},
  {'address': '7A34nZvNrcsfCJYgTEruQdSzgoau8ezFMDo3Ce1wbB9SARucERjWsz7FaSrPRGZqHJY8pScU4hMeHLqMMEGxos3hKFB9EnR',
-  'amount': 0,
   'recipient_name': 'a6ddd903ae1246c09c4e15b60e2ccab9'},
  {'address': '7A34nZvNrcsfCJYgTEruQdSzgoau8ezFMDo3Ce1wbB9SARucERjWsz7FaSrPRGZqHJY8pScU4hMeHLqMMEGxos3hKFB9EnR',
   'amount': 78,
