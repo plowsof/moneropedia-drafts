@@ -154,10 +154,10 @@ jobs:
     needs: packageWindows
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4.1.7
       with:
         name: monero-gui-install-win-x64-${{ github.event.inputs.tag }}
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4.1.7
       with:
         name: docker-linux-static
     - uses: actions/cache@v3
